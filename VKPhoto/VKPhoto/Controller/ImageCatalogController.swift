@@ -13,27 +13,33 @@ class ImageCatalogController: UIViewController {
     var userIconImageView: UIImageView?
     var userNicknameLabel: UILabel?
     var settingsButton: UIButton?
-    var settingsButtonDidTapDelegate: (() ->  Void)?
-    var imageStack: UIStackView?
-    var getImageDelegate: ((ImageItem?) -> Void)?
+    var imageCollection: UICollectionView?
+    var plusButton: UIButton?
     
+    var settingsButtonDidTapDelegate: (() ->  Void)?
+    var getImageDelegate: ((ImageItem?) -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         let view = ImageCatalogView()
+        self.view = view
+        view.prepare()
+        self.userIconImageView = view.userIconImageView
+        self.userNicknameLabel = view.userNicknameLabel
+        self.settingsButton = view.settingsButton
+        self.imageCollection = view.imageCollection
+        self.plusButton = view.plusButton
         
-     //   self.view = view
-      //  view.prepare()
-      //  self.userIconImageView = view.userIconImageView
-     //   self.userNicknameLabel = view.userNicknameLabel
-     //   self.settingsButton = view.settingsButton
+        imageCollection?.dataSource = self
+        imageCollection?.delegate = self
+        imageCollection?.register(CollectionCell.self, forCellWithReuseIdentifier: CollectionCell.identifier)
         
         settingsButton?.addTarget(self, action: #selector(settingsButtonDidTap), for: .touchUpInside)
         
-     //   let imagePicker = UIImagePickerController()
-    //    imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
-      //  imagePicker.delegate = self
-      //  self.present(imagePicker, animated: true, completion: nil)
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
+        imagePicker.delegate = self
+        self.present(imagePicker, animated: true, completion: nil)
     }
 
     @objc func settingsButtonDidTap() {
@@ -59,6 +65,7 @@ extension ImageCatalogController: UIImagePickerControllerDelegate, UINavigationC
             let newItem = ImageItem(filename: imageName)
             CatalogDataService.shared.appendItem(newItem)
             CatalogDataService.shared.save()
+            imageCollection?.reloadData()
             getImageDelegate?(newItem)
         } catch {
             print("ImageCatalogControllerError: \(error)")
@@ -73,5 +80,47 @@ extension ImageCatalogController: UIImagePickerControllerDelegate, UINavigationC
             throw NSError()
         }
         return dir
+    }
+}
+
+extension ImageCatalogController: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return CatalogDataService.shared.data.items.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCell.identifier, for: indexPath) as! CollectionCell
+        cell.translatesAutoresizingMaskIntoConstraints = false
+        cell.imageView.image = UIImage(named: "dogTemplate")
+        cell.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        cell.widthAnchor.constraint(equalToConstant: 300).isActive = true
+        cell.prepare()
+        return cell
+    }
+    
+}
+
+extension ImageCatalogController: UICollectionViewDelegate { }
+
+protocol ReusableView: AnyObject {
+    static var identifier: String { get }
+}
+
+class CollectionCell: UICollectionViewCell {
+    let imageView = UIImageView()
+    
+    func prepare() {
+        self.contentView.addSubview(imageView)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.stretch()
+        imageView.backgroundColor = .green.withAlphaComponent(0.3)
+        imageView.contentMode = .scaleAspectFit
+    }
+}
+
+extension CollectionCell: ReusableView {
+    static var identifier: String {
+        return String(describing: self)
     }
 }

@@ -13,7 +13,13 @@ class ImageCatalogView: UIView {
     let userIconImageView = UIImageView()
     let userNicknameLabel = UILabel()
     let settingsButton = UIButton()
-    let imageCollection = UICollectionView()
+    let imageCollection: UICollectionView = {
+        let viewLayout = UICollectionViewFlowLayout()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: viewLayout)
+        collectionView.backgroundColor = .white
+        return collectionView
+    }()
+    let plusButton = UIButton()
     
     func prepare() {
         self.backgroundColor = .white
@@ -49,13 +55,21 @@ class ImageCatalogView: UIView {
     
         settingsButton.setImage(UIImage(named: "settingsIcon"), for: .normal)
         
-        //self.addSubview(imageCollection)
-   //     imageCollection.translatesAutoresizingMaskIntoConstraints = false
-    //    imageCollection.topAnchor.constraint(equalTo: userIconImageView.bottomAnchor, constant: 20).isActive = true
-      //  imageCollection.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor).isActive = true
-      //  imageCollection.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
+        self.addSubview(imageCollection)
+        imageCollection.translatesAutoresizingMaskIntoConstraints = false
+        imageCollection.topAnchor.constraint(equalTo: userIconImageView.bottomAnchor, constant: 20).isActive = true
+        imageCollection.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor).isActive = true
+        imageCollection.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
+        imageCollection.backgroundColor = .blue.withAlphaComponent(0.3)
         
-   
-        
+        self.addSubview(plusButton)
+        plusButton.translatesAutoresizingMaskIntoConstraints = false
+        plusButton.center(vertically: false, horizontally: true)
+        plusButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
+        plusButton.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        plusButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        plusButton.setImage(UIImage(named: "plusButtonIcon"), for: .normal)
+        plusButton.layer.cornerRadius = 40
       }
+    
 }
