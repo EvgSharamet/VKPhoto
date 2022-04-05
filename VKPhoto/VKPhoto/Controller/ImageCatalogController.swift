@@ -15,6 +15,7 @@ class ImageCatalogController: UIViewController {
     var settingsButton: UIButton?
     var imageCollection: UICollectionView?
     var plusButton: UIButton?
+    let imagePicker = UIImagePickerController()
     
     var settingsButtonDidTapDelegate: (() ->  Void)?
     var getImageDelegate: ((ImageItem?) -> Void)?
@@ -30,20 +31,28 @@ class ImageCatalogController: UIViewController {
         self.imageCollection = view.imageCollection
         self.plusButton = view.plusButton
         
+        imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
+        imagePicker.delegate = self
+        
         imageCollection?.dataSource = self
         imageCollection?.delegate = self
         imageCollection?.register(CollectionCell.self, forCellWithReuseIdentifier: CollectionCell.identifier)
         
         settingsButton?.addTarget(self, action: #selector(settingsButtonDidTap), for: .touchUpInside)
+        plusButton?.addTarget(self, action: #selector(plusButtonDidTap), for: .touchUpInside)
         
-        let imagePicker = UIImagePickerController()
-        imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
-        imagePicker.delegate = self
-        self.present(imagePicker, animated: true, completion: nil)
+        //ОЧЕНЬ БОЛЬШАЯ ЗАГЛУШКА :
+        let fakeUser = UserService.User(login: "fakeLogin", password: "fakePassword", avatar: nil, imageСollection: [])
+        UserService.shared.addUser(fakeUser)
+        UserService.shared.setActiveUserIndex(index: 0)
     }
 
     @objc func settingsButtonDidTap() {
         settingsButtonDidTapDelegate?()
+    }
+    
+    @objc func plusButtonDidTap() {
+        self.present(imagePicker, animated: true, completion: nil)
     }
 }
 
@@ -63,8 +72,11 @@ extension ImageCatalogController: UIImagePickerControllerDelegate, UINavigationC
             }
 
             let newItem = ImageItem(filename: imageName)
-            CatalogDataService.shared.appendItem(newItem)
-            CatalogDataService.shared.save()
+            guard let activeUserIndex = UserService.shared.getActiveUserIndex() else { return }
+            var user = UserService.shared.userList[activeUserIndex]
+            user.imageСollection.append(newItem)
+            UserService.shared.updateUser(user, index: activeUserIndex)
+            
             imageCollection?.reloadData()
             getImageDelegate?(newItem)
         } catch {
@@ -86,15 +98,16 @@ extension ImageCatalogController: UIImagePickerControllerDelegate, UINavigationC
 extension ImageCatalogController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return CatalogDataService.shared.data.items.count
+        guard let activeUserIndex = UserService.shared.getActiveUserIndex() else {  return 0 } // тут нужна заглушка на такое дело
+        return UserService.shared.userList[activeUserIndex].imageСollection.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCell.identifier, for: indexPath) as! CollectionCell
         cell.translatesAutoresizingMaskIntoConstraints = false
         cell.imageView.image = UIImage(named: "dogTemplate")
-        cell.heightAnchor.constraint(equalToConstant: 300).isActive = true
-        cell.widthAnchor.constraint(equalToConstant: 300).isActive = true
+        cell.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        cell.widthAnchor.constraint(equalToConstant: 200).isActive = true
         cell.prepare()
         return cell
     }
