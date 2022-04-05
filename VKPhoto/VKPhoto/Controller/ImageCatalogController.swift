@@ -104,11 +104,8 @@ extension ImageCatalogController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCell.identifier, for: indexPath) as! CollectionCell
-        cell.translatesAutoresizingMaskIntoConstraints = false
-        cell.imageView.image = UIImage(named: "dogTemplate")
-        cell.heightAnchor.constraint(equalToConstant: 200).isActive = true
-        cell.widthAnchor.constraint(equalToConstant: 200).isActive = true
         cell.prepare()
+        cell.imageView.image = UIImage(named: "dogTemplate")
         return cell
     }
     
@@ -116,8 +113,30 @@ extension ImageCatalogController: UICollectionViewDataSource {
 
 extension ImageCatalogController: UICollectionViewDelegate { }
 
+private enum LayoutConstant {
+    static let spacing: CGFloat = 10.0
+    static let itemHeight: CGFloat = 150.0
+}
+
 protocol ReusableView: AnyObject {
     static var identifier: String { get }
+}
+
+extension ImageCatalogController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = itemWidth(for: view.frame.width, spacing: LayoutConstant.spacing)
+        return CGSize(width: width, height: LayoutConstant.itemHeight)
+    }
+    
+    func itemWidth(for width: CGFloat, spacing: CGFloat) -> CGFloat {
+            let itemsInRow: CGFloat = 2
+
+            let totalSpacing: CGFloat = 2 * spacing + (itemsInRow - 1) * spacing
+            let finalWidth = (width - totalSpacing) / itemsInRow
+
+            return floor(finalWidth)
+        }
 }
 
 class CollectionCell: UICollectionViewCell {

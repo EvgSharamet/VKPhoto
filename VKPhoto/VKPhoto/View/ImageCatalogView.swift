@@ -58,9 +58,9 @@ class ImageCatalogView: UIView {
         self.addSubview(imageCollection)
         imageCollection.translatesAutoresizingMaskIntoConstraints = false
         imageCollection.topAnchor.constraint(equalTo: userIconImageView.bottomAnchor, constant: 20).isActive = true
-        imageCollection.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor).isActive = true
+        imageCollection.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
+        imageCollection.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -10).isActive = true
         imageCollection.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
-        imageCollection.backgroundColor = .blue.withAlphaComponent(0.3)
         
         self.addSubview(plusButton)
         plusButton.translatesAutoresizingMaskIntoConstraints = false
