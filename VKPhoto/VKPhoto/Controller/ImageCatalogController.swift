@@ -137,6 +137,7 @@ extension ImageCatalogController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCatalogController.identifier, for: indexPath) as! CollectionCell
+        cell.prepare()
         guard let activeUserIndex = UserService.shared.getActiveUserIndex() else { return cell }
         let activeUser = UserService.shared.userList[activeUserIndex]
         cell.imageView.image = activeUser.imageСollection[indexPath.row].getImage()
