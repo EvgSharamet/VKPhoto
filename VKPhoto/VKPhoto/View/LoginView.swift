@@ -79,7 +79,7 @@ class LoginView: UIView {
             green: 116 / 255,
             blue: 163 / 255,
             alpha: 1)
-        loginButton.layer.cornerRadius = 10
+        loginButton.layer.cornerRadius = 20
     }
     
 }

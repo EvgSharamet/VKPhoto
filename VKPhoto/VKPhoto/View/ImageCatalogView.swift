@@ -71,5 +71,4 @@ class ImageCatalogView: UIView {
         plusButton.setImage(UIImage(named: "plusButtonIcon"), for: .normal)
         plusButton.layer.cornerRadius = 40
       }
-    
 }
