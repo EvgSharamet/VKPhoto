@@ -156,17 +156,18 @@ extension ImageCatalogController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = itemWidth(for: view.frame.width, spacing: LayoutConstant.spacing)
-        return CGSize(width: width, height: LayoutConstant.itemHeight)
+        let height = width
+        return CGSize(width: width, height: height )
     }
     
     func itemWidth(for width: CGFloat, spacing: CGFloat) -> CGFloat {
-            let itemsInRow: CGFloat = 2
+        let itemsInRow: CGFloat = 2
 
-            let totalSpacing: CGFloat = 2 * spacing + (itemsInRow - 1) * spacing
-            let finalWidth = (width - totalSpacing) / itemsInRow
+        let totalSpacing: CGFloat = 2 * spacing + (itemsInRow - 1) * spacing
+        let finalWidth = (width - totalSpacing) / itemsInRow
 
-            return floor(finalWidth)
-        }
+        return floor(finalWidth)
+    }
 }
 
 class CollectionCell: UICollectionViewCell {
