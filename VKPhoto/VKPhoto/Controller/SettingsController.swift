@@ -14,6 +14,7 @@ class SettingsController: UIViewController {
     var userNicknameLabel: UILabel?
     var tableView: UITableView?
     var logoutButton: UIButton?
+    public var logoutButtonDidTapDelegate : (() ->  Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +37,12 @@ class SettingsController: UIViewController {
             userIconImageView?.image = userAvatar
         }
         userNicknameLabel?.text = activeUser.login
+        
+        self.logoutButton?.addTarget(self, action: #selector(logoutButtonDidTap), for: .touchUpInside)
+    }
+    
+    @objc func logoutButtonDidTap() {
+        logoutButtonDidTapDelegate?()
     }
 }
 

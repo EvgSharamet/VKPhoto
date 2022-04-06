@@ -34,6 +34,13 @@ class MainNavigationController: UINavigationController {
     
     func goToSettings() {
         let settingsWindow = SettingsController()
+        settingsWindow.logoutButtonDidTapDelegate = logoutOfSystem
         pushViewController(settingsWindow, animated: true)
+    }
+    
+    func logoutOfSystem() {
+        let loginWindow = LoginController()
+        loginWindow.loginButtonDidTapDelegate = loginInSystem
+        pushViewController(loginWindow, animated: true)
     }
 }
