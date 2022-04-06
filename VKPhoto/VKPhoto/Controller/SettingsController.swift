@@ -78,6 +78,7 @@ class TableViewCell: UITableViewCell {
     let userNicknameLabel = UILabel()
     
     func prepare() {
+        self.selectionStyle = .none
         self.contentView.addSubview(userIconImageView)
         self.contentView.heightAnchor.constraint(equalToConstant: 80).isActive = true
         guard let superview = userIconImageView.superview else { return }
