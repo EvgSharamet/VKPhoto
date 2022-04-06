@@ -42,7 +42,14 @@ class SettingsController: UIViewController {
     }
     
     @objc func logoutButtonDidTap() {
-        logoutButtonDidTapDelegate?()
+        let logoutAlert = UIAlertController(title: "Are you sure?", message: nil, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
+        let submitAction = UIAlertAction(title: "OK", style: .default) { _ in
+            self.logoutButtonDidTapDelegate?()
+        }
+        logoutAlert.addAction(submitAction)
+        logoutAlert.addAction(cancelAction)
+        present(logoutAlert, animated: true)
     }
 }
 
