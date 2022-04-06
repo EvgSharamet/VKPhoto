@@ -11,7 +11,7 @@ import UIKit
 class ImageCatalogView: UIView {
     
     let userIconImageView = UIImageView()
-    let userIconImageButton: UIButton()
+    let userIconImageButton = UIButton()
     let userNicknameLabel = UILabel()
     let settingsButton = UIButton()
     let imageCollection: UICollectionView = {
@@ -42,9 +42,15 @@ class ImageCatalogView: UIView {
         userIconImageView.heightAnchor.constraint(equalToConstant: 180).isActive = true
         userIconImageView.widthAnchor.constraint(equalToConstant: 180).isActive = true
         userIconImageView.layer.cornerRadius = 90
+        userIconImageView.layer.masksToBounds = true
         
         self.addSubview(userIconImageButton)
-        userIconImageButton.translatesAutoresiz
+        userIconImageButton.translatesAutoresizingMaskIntoConstraints = false
+        userIconImageButton.widthAnchor.constraint(equalTo: userIconImageView.widthAnchor).isActive = true
+        userIconImageButton.centerXAnchor.constraint(equalTo: userIconImageView.centerXAnchor).isActive = true
+        userIconImageButton.centerYAnchor.constraint(equalTo: userIconImageView.centerYAnchor).isActive = true
+        userIconImageButton.heightAnchor.constraint(equalTo: userIconImageView.heightAnchor).isActive = true
+        userIconImageButton.layer.cornerRadius = userIconImageView.layer.cornerRadius
         
         userIconImageView.image = UIImage(named: "dogTemplate")
         userIconImageView.contentMode = .scaleAspectFit

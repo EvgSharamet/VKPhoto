@@ -29,6 +29,13 @@ class SettingsController: UIViewController {
         tableView?.delegate = self
         tableView?.dataSource = self
         self.tableView?.register(TableViewCell.self, forCellReuseIdentifier: "TableViewCell")
+        
+        guard let activeUserIndex = UserService.shared.getActiveUserIndex() else { return }
+        let activeUser = UserService.shared.userList[activeUserIndex]
+        if let userAvatar = activeUser.avatar?.getImage() {
+            userIconImageView?.image = userAvatar
+        }
+        userNicknameLabel?.text = activeUser.login
     }
 }
 
@@ -42,7 +49,9 @@ extension SettingsController: UITableViewDelegate, UITableViewDataSource {
         let cell = self.tableView?.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
         cell.prepare()
         let user = UserService.shared.userList[indexPath.row]
-        cell.userIconImageView.image = user.avatar?.getImage()
+        if let userAvatar = user.avatar?.getImage() {
+            cell.userIconImageView.image = userAvatar
+        }
         cell.userNicknameLabel.text = user.login
         return cell
      }
@@ -74,6 +83,7 @@ class TableViewCell: UITableViewCell {
         userIconImageView.layer.cornerRadius = 37
         userIconImageView.backgroundColor = .blue.withAlphaComponent(0.5)
         userIconImageView.contentMode = .scaleAspectFit
+        userIconImageView.layer.masksToBounds = true
         userIconImageView.image = UIImage(named: "dogTemplate")
         
         self.contentView.addSubview(userNicknameLabel)

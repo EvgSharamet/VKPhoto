@@ -29,6 +29,7 @@ class SettingsView: UIView {
         userIconImageView.image = UIImage(named: "dogTemplate")
         userIconImageView.contentMode = .scaleAspectFit
         userIconImageView.backgroundColor = .green.withAlphaComponent(0.5)
+        userIconImageView.layer.masksToBounds = true
         
         self.addSubview(userNicknameLabel)
         userNicknameLabel.translatesAutoresizingMaskIntoConstraints = false

@@ -18,6 +18,7 @@ class ImageCatalogController: UIViewController {
     var plusButton: UIButton?
     let imagePicker = UIImagePickerController()
     static let identifier = "CollectionViewCell"
+    var isEditingAvatar = true
     
     var settingsButtonDidTapDelegate: (() ->  Void)?
     var getImageDelegate: ((ImageItem?) -> Void)?
@@ -32,13 +33,16 @@ class ImageCatalogController: UIViewController {
         let view = ImageCatalogView()
         self.view = view
         view.prepare()
+        
         self.userIconImageView = view.userIconImageView
+        self.userIconImageButton = view.userIconImageButton
         self.userNicknameLabel = view.userNicknameLabel
         self.settingsButton = view.settingsButton
         self.imageCollection = view.imageCollection
         self.plusButton = view.plusButton
         
         imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
+        imagePicker.allowsEditing = true
         imagePicker.delegate = self
         
         imageCollection?.dataSource = self
@@ -47,11 +51,20 @@ class ImageCatalogController: UIViewController {
         
         settingsButton?.addTarget(self, action: #selector(settingsButtonDidTap), for: .touchUpInside)
         plusButton?.addTarget(self, action: #selector(plusButtonDidTap), for: .touchUpInside)
+        userIconImageButton?.addTarget(self, action: #selector(userIconImageButtonDidTap), for: .touchUpInside)
         
         //ОЧЕНЬ БОЛЬШАЯ ЗАГЛУШКА :
         let fakeUser = UserService.User(login: "fakeLogin", password: "fakePassword", avatar: nil, imageСollection: [])
         UserService.shared.addUser(fakeUser)
         UserService.shared.setActiveUserIndex(index: 0)
+        
+        
+        guard let activeUserIndex = UserService.shared.getActiveUserIndex() else { return }
+        let activeUser = UserService.shared.userList[activeUserIndex]
+        if let userAvatar = activeUser.avatar?.getImage() {
+            userIconImageView?.image = userAvatar
+        }
+        userNicknameLabel?.text = activeUser.login
     }
 
     @objc func settingsButtonDidTap() {
@@ -59,6 +72,12 @@ class ImageCatalogController: UIViewController {
     }
     
     @objc func plusButtonDidTap() {
+        isEditingAvatar = false
+        self.present(imagePicker, animated: true, completion: nil)
+    }
+    
+    @objc func userIconImageButtonDidTap() {
+        isEditingAvatar = true
         self.present(imagePicker, animated: true, completion: nil)
     }
 }
@@ -68,7 +87,7 @@ extension ImageCatalogController: UIImagePickerControllerDelegate, UINavigationC
     //MARK: - internal functions
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        guard let image = info[.originalImage] as? UIImage else { return }
+        guard let image = info[.editedImage] as? UIImage else { return }
         let imageName = UUID().uuidString
         
         do {
@@ -77,15 +96,22 @@ extension ImageCatalogController: UIImagePickerControllerDelegate, UINavigationC
             if let jpegData = image.jpegData(compressionQuality: 0.8) {
                 try jpegData.write(to: imagePath)
             }
-
-            let newItem = ImageItem(filename: imageName)
-            guard let activeUserIndex = UserService.shared.getActiveUserIndex() else { return }
-            var user = UserService.shared.userList[activeUserIndex]
-            user.imageСollection.append(newItem)
-            UserService.shared.updateUser(user, index: activeUserIndex)
-            
-            imageCollection?.reloadData()
-            getImageDelegate?(newItem)
+            if isEditingAvatar {
+                let newAvatar = ImageItem(filename: imageName)
+                guard let activeUserIndex = UserService.shared.getActiveUserIndex() else { return }
+                let activeUser = UserService.shared.userList[activeUserIndex]
+                var activeUserWithUpdate = activeUser
+                activeUserWithUpdate.avatar = newAvatar
+                UserService.shared.updateUser(activeUserWithUpdate, index: activeUserIndex)
+                self.userIconImageView?.image = newAvatar.getImage()
+            } else {
+                let newItem = ImageItem(filename: imageName)
+                guard let activeUserIndex = UserService.shared.getActiveUserIndex() else { return }
+                var user = UserService.shared.userList[activeUserIndex]
+                user.imageСollection.append(newItem)
+                UserService.shared.updateUser(user, index: activeUserIndex)
+                imageCollection?.reloadData()
+            }
         } catch {
             print("ImageCatalogControllerError: \(error)")
         }
@@ -113,7 +139,6 @@ extension ImageCatalogController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCatalogController.identifier, for: indexPath) as! CollectionCell
         guard let activeUserIndex = UserService.shared.getActiveUserIndex() else { return cell }
         let activeUser = UserService.shared.userList[activeUserIndex]
-        cell.prepare()
         cell.imageView.image = activeUser.imageСollection[indexPath.row].getImage()
         return cell
     }
@@ -150,7 +175,6 @@ class CollectionCell: UICollectionViewCell {
         self.contentView.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.stretch()
-        imageView.backgroundColor = .green.withAlphaComponent(0.3)
         imageView.contentMode = .scaleAspectFit
     }
 }
