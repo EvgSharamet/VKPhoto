@@ -11,6 +11,7 @@ import UIKit
 class SignupController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        hideKeyboardWhenTappedAround()
         let view = SignupView()
         self.view.addSubview(view)
         view.prepare()

@@ -19,6 +19,7 @@ class LoginController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        hideKeyboardWhenTappedAround()
         let view = LoginView()
         self.view.addSubview(view)
         view.prepare()
