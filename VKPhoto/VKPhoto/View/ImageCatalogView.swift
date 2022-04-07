@@ -24,7 +24,16 @@ class ImageCatalogView: UIView {
     
     func prepare() {
         self.backgroundColor = .white
-        
+        setupUserNickNameLabel()
+        setupUserIconImageView()
+        setupUserIconImageButton()
+        setupIconImageView()
+        setupSettingsButton()
+        setupImageCollection()
+        setupPlusButton()
+      }
+    
+    func setupUserNickNameLabel() {
         self.addSubview(userNicknameLabel)
         userNicknameLabel.translatesAutoresizingMaskIntoConstraints = false
         userNicknameLabel.center(vertically: false, horizontally: true)
@@ -34,7 +43,9 @@ class ImageCatalogView: UIView {
         userNicknameLabel.textAlignment = .center
         userNicknameLabel.font = UIConst.nicknameFont
         userNicknameLabel.text = "USER_NICKNAME"
-        
+    }
+    
+    func setupUserIconImageView() {
         self.addSubview(userIconImageView)
         userIconImageView.translatesAutoresizingMaskIntoConstraints = false
         userIconImageView.center(vertically: false, horizontally: true)
@@ -43,7 +54,9 @@ class ImageCatalogView: UIView {
         userIconImageView.widthAnchor.constraint(equalToConstant: 180).isActive = true
         userIconImageView.layer.cornerRadius = 90
         userIconImageView.layer.masksToBounds = true
-        
+    }
+    
+    func  setupUserIconImageButton() {
         self.addSubview(userIconImageButton)
         userIconImageButton.translatesAutoresizingMaskIntoConstraints = false
         userIconImageButton.widthAnchor.constraint(equalTo: userIconImageView.widthAnchor).isActive = true
@@ -51,27 +64,34 @@ class ImageCatalogView: UIView {
         userIconImageButton.centerYAnchor.constraint(equalTo: userIconImageView.centerYAnchor).isActive = true
         userIconImageButton.heightAnchor.constraint(equalTo: userIconImageView.heightAnchor).isActive = true
         userIconImageButton.layer.cornerRadius = userIconImageView.layer.cornerRadius
-        
+    }
+    
+    func setupIconImageView() {
         userIconImageView.image = UIImage(named: "dogTemplate")
         userIconImageView.contentMode = .scaleAspectFit
         userIconImageView.backgroundColor = .systemGray6
-
+    }
+    
+    func setupSettingsButton() {
         self.addSubview(settingsButton)
         settingsButton.translatesAutoresizingMaskIntoConstraints = false
         settingsButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
         settingsButton.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -15).isActive = true
         settingsButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
         settingsButton.widthAnchor.constraint(equalToConstant: 35).isActive = true
-    
         settingsButton.setImage(UIImage(named: "settingsIcon"), for: .normal)
-        
+    }
+    
+    func setupImageCollection() {
         self.addSubview(imageCollection)
         imageCollection.translatesAutoresizingMaskIntoConstraints = false
         imageCollection.topAnchor.constraint(equalTo: userIconImageView.bottomAnchor, constant: 20).isActive = true
         imageCollection.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
         imageCollection.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -10).isActive = true
         imageCollection.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
-        
+    }
+    
+    func setupPlusButton() {
         self.addSubview(plusButton)
         plusButton.translatesAutoresizingMaskIntoConstraints = false
         plusButton.center(vertically: false, horizontally: true)
@@ -80,5 +100,5 @@ class ImageCatalogView: UIView {
         plusButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
         plusButton.setImage(UIImage(named: "plusButtonIcon"), for: .normal)
         plusButton.layer.cornerRadius = 40
-      }
+    }
 }

@@ -18,7 +18,13 @@ class SettingsView: UIView {
     
     func prepare() {
         self.backgroundColor = .white
-        
+        setupUserIconImageView()
+        setupUserNickNameLabel()
+        setupTableView()
+        setupLogoutButton()
+    }
+    
+    func setupUserIconImageView() {
         self.addSubview(userIconImageView)
         userIconImageView.translatesAutoresizingMaskIntoConstraints = false
         userIconImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
@@ -30,7 +36,9 @@ class SettingsView: UIView {
         userIconImageView.contentMode = .scaleAspectFit
         userIconImageView.backgroundColor = .green.withAlphaComponent(0.5)
         userIconImageView.layer.masksToBounds = true
-        
+    }
+    
+    func setupUserNickNameLabel() {
         self.addSubview(userNicknameLabel)
         userNicknameLabel.translatesAutoresizingMaskIntoConstraints = false
         userNicknameLabel.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor).isActive = true
@@ -40,14 +48,18 @@ class SettingsView: UIView {
         userNicknameLabel.textAlignment = .center
         userNicknameLabel.text = "USER_NICKNAME"
         userNicknameLabel.font = UIConst.nicknameFont
-        
+    }
+    
+    func setupTableView() {
         self.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
         tableView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: 10).isActive = true
         tableView.topAnchor.constraint(equalTo: userIconImageView.bottomAnchor, constant: 20).isActive = true
         tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
-                
+    }
+    
+    func setupLogoutButton() {
         self.addSubview(logoutButton)
         logoutButton.translatesAutoresizingMaskIntoConstraints = false
         logoutButton.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor).isActive = true
@@ -62,4 +74,5 @@ class SettingsView: UIView {
             alpha: 1)
         logoutButton.layer.cornerRadius = 20
     }
+    
 }
