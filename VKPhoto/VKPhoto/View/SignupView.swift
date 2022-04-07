@@ -70,7 +70,7 @@ class SignupView: UIView {
         loginTextField.widthAnchor.constraint(equalTo: mainStackView.widthAnchor, constant: -20).isActive = true
         loginTextField.layer.cornerRadius = 10
         loginTextField.setLeftPaddingPoints(20)
-        loginTextField.text = "LOGIN_TEXT"
+        loginTextField.placeholder = "Login"
         loginTextField.backgroundColor = .systemGray6
         loginTextField.textAlignment = .left
         loginTextField.textColor = .lightGray
@@ -78,7 +78,7 @@ class SignupView: UIView {
     
     func setupPasswordTextField() {
         mainStackView.addArrangedSubview(passwordTextField)
-        passwordTextField.text = "PASSWORD_TEXT"
+        passwordTextField.text = "Password"
         passwordTextField.widthAnchor.constraint(equalTo: mainStackView.widthAnchor, constant: -20).isActive = true
         passwordTextField.layer.cornerRadius = 10
         passwordTextField.setLeftPaddingPoints(20)

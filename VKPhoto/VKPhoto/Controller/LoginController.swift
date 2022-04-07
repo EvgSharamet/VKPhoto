@@ -32,9 +32,22 @@ class LoginController: UIViewController {
         loginButton?.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
         signupButton?.addTarget(self, action: #selector(signupButtonDidTap), for: .touchUpInside)
     }
-    
+
     @objc func loginButtonDidTap() {
-        loginButtonDidTapDelegate?()
+        if let login = loginTextField?.text, let password = passwordTextField?.text {
+            if let activeUserIndex = UserService.shared.findUser(login: login, password: password) {
+                UserService.shared.setActiveUserIndex(index: activeUserIndex)
+                loginButtonDidTapDelegate?()
+            } else {
+                let loginAlert = UIAlertController(title: "No such user exists", message: nil, preferredStyle: .alert)
+                loginAlert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                self.present(loginAlert, animated: true, completion: nil)
+            }
+        } else {
+            let loginAlert = UIAlertController(title: "The username or password is incorrect", message: nil, preferredStyle: .alert)
+            loginAlert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+            self.present(loginAlert, animated: true, completion: nil)
+        }
     }
     
     @objc func signupButtonDidTap() {

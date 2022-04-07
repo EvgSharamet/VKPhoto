@@ -16,33 +16,71 @@ class UserService {
         var imageСollection: [ImageItem]
     }
     
-    static let shared = UserService()
-    
-    private var activeUserIndex: Int?
-    private(set) var userList : [User] = []
-    
-    func getUsers() -> [User] {
-        return userList
+    private struct UserData: Codable {
+        var userList = [User]()
+        var activeUserIndex: Int?
     }
     
-    func addUser(_ user: User) {
-        userList.append(user)
+    typealias DataChangedListener = () -> Void
+    
+    static let shared = UserService()
+    let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent(storeFileName)
+    
+    private static let storeFileName = "catalog.data"
+    private var activeUserIndex: Int?
+    private var data = UserData()
+    private var dataChangedListeners = [DataChangedListener]()
+    
+    func getUsers() -> [User] {
+        return data.userList
+    }
+    
+    func addUser(_ user: User) -> Int {
+        data.userList.append(user)
+        return data.userList.indices.last ?? 0
     }
     
     func removeUser(index: Int) {
-        userList.remove(at: index)
+        data.userList.remove(at: index)
     }
     
     func updateUser(_ user: User, index: Int) {
-        userList[index] = user
+        data.userList[index] = user
     }
     
     func getActiveUserIndex() -> Int? {
         return activeUserIndex
     }
     
-    func setActiveUserIndex(index: Int) {
-        activeUserIndex = index
+    func setActiveUserIndex(index: Int?) {
+        data.activeUserIndex = index
+    }
+    
+    func save() {
+        do {
+            guard let url = url else { return }
+            let dataForJson = self.data
+            let encoder = JSONEncoder()
+            let data = try encoder.encode(dataForJson)
+            try data.write(to: url, options: [])
+        } catch { }
+    }
+    
+    func load() {
+        do {
+            guard let url = url else { return }
+            let jsonData = try Data(contentsOf: url)
+            let decoder = JSONDecoder()
+            let container = try decoder.decode(UserData.self, from: jsonData)
+            self.data = container
+        } catch { }
+    }
+    
+    func findUser(login: String, password: String) -> Int? {
+        return data.userList
+                .enumerated()
+                .first { $0.element.login == login && $0.element.password == password }?
+                .offset
     }
     
     private init() {}

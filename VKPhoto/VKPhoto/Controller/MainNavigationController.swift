@@ -29,6 +29,7 @@ class MainNavigationController: UINavigationController {
     
     func signupInSystem() {
         let signupWindow = SignupController()
+        signupWindow.nextButtonDidTapDelegate = loginInSystem
         pushViewController(signupWindow, animated: true)
     }
     

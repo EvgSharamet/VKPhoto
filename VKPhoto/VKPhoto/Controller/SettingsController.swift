@@ -32,7 +32,7 @@ class SettingsController: UIViewController {
         self.tableView?.register(TableViewCell.self, forCellReuseIdentifier: "TableViewCell")
         
         guard let activeUserIndex = UserService.shared.getActiveUserIndex() else { return }
-        let activeUser = UserService.shared.userList[activeUserIndex]
+        let activeUser = (UserService.shared.getUsers())[activeUserIndex]
         if let userAvatar = activeUser.avatar?.getImage() {
             userIconImageView?.image = userAvatar
         }
@@ -45,6 +45,7 @@ class SettingsController: UIViewController {
         let logoutAlert = UIAlertController(title: "Are you sure?", message: nil, preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
         let submitAction = UIAlertAction(title: "OK", style: .default) { _ in
+            UserService.shared.setActiveUserIndex(index: nil)
             self.logoutButtonDidTapDelegate?()
         }
         logoutAlert.addAction(submitAction)
@@ -56,13 +57,13 @@ class SettingsController: UIViewController {
 extension SettingsController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        UserService.shared.userList.count
+        UserService.shared.getUsers().count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView?.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
         cell.prepare()
-        let user = UserService.shared.userList[indexPath.row]
+        let user = (UserService.shared.getUsers())[indexPath.row]
         if let userAvatar = user.avatar?.getImage() {
             cell.userIconImageView.image = userAvatar
         }

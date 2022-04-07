@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window.rootViewController = MainNavigationController()
         window.makeKeyAndVisible()
         self.window = window
+        UserService.shared.load()
         return true
     }
 }

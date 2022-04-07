@@ -53,14 +53,8 @@ class ImageCatalogController: UIViewController {
         plusButton?.addTarget(self, action: #selector(plusButtonDidTap), for: .touchUpInside)
         userIconImageButton?.addTarget(self, action: #selector(userIconImageButtonDidTap), for: .touchUpInside)
         
-        //ОЧЕНЬ БОЛЬШАЯ ЗАГЛУШКА :
-        let fakeUser = UserService.User(login: "fakeLogin", password: "fakePassword", avatar: nil, imageСollection: [])
-        UserService.shared.addUser(fakeUser)
-        UserService.shared.setActiveUserIndex(index: 0)
-        
-        
         guard let activeUserIndex = UserService.shared.getActiveUserIndex() else { return }
-        let activeUser = UserService.shared.userList[activeUserIndex]
+        let activeUser = (UserService.shared.getUsers())[activeUserIndex]
         if let userAvatar = activeUser.avatar?.getImage() {
             userIconImageView?.image = userAvatar
         }
@@ -99,7 +93,7 @@ extension ImageCatalogController: UIImagePickerControllerDelegate, UINavigationC
             if isEditingAvatar {
                 let newAvatar = ImageItem(filename: imageName)
                 guard let activeUserIndex = UserService.shared.getActiveUserIndex() else { return }
-                let activeUser = UserService.shared.userList[activeUserIndex]
+                let activeUser = (UserService.shared.getUsers())[activeUserIndex]
                 var activeUserWithUpdate = activeUser
                 activeUserWithUpdate.avatar = newAvatar
                 UserService.shared.updateUser(activeUserWithUpdate, index: activeUserIndex)
@@ -107,11 +101,12 @@ extension ImageCatalogController: UIImagePickerControllerDelegate, UINavigationC
             } else {
                 let newItem = ImageItem(filename: imageName)
                 guard let activeUserIndex = UserService.shared.getActiveUserIndex() else { return }
-                var user = UserService.shared.userList[activeUserIndex]
+                var user = (UserService.shared.getUsers())[activeUserIndex]
                 user.imageСollection.append(newItem)
                 UserService.shared.updateUser(user, index: activeUserIndex)
                 imageCollection?.reloadData()
             }
+            UserService.shared.save()
         } catch {
             print("ImageCatalogControllerError: \(error)")
         }
@@ -128,25 +123,22 @@ extension ImageCatalogController: UIImagePickerControllerDelegate, UINavigationC
     }
 }
 
-extension ImageCatalogController: UICollectionViewDataSource {
+extension ImageCatalogController: UICollectionViewDataSource, UICollectionViewDelegate  {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let activeUserIndex = UserService.shared.getActiveUserIndex() else {  return 0 } // тут нужна заглушка на такое дело
-        return UserService.shared.userList[activeUserIndex].imageСollection.count
+        return (UserService.shared.getUsers())[activeUserIndex].imageСollection.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCatalogController.identifier, for: indexPath) as! CollectionCell
         cell.prepare()
         guard let activeUserIndex = UserService.shared.getActiveUserIndex() else { return cell }
-        let activeUser = UserService.shared.userList[activeUserIndex]
+        let activeUser = (UserService.shared.getUsers())[activeUserIndex]
         cell.imageView.image = activeUser.imageСollection[indexPath.row].getImage()
         return cell
     }
-    
 }
-
-extension ImageCatalogController: UICollectionViewDelegate { }
 
 protocol ReusableView: AnyObject {
     static var identifier: String { get }
