@@ -9,11 +9,13 @@ import Foundation
 import UIKit
 
 class LoginController: UIViewController {
-    public var loginButtonDidTapDelegate : (() ->  Void)?
+    public var loginButtonDidTapDelegate: (() ->  Void)?
+    public var signupButtonDidTapDelegate: (() -> Void)?
     
     var loginTextField: UITextField?
     var passwordTextField: UITextField?
     var loginButton: UIButton?
+    var signupButton: UIButton?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,11 +26,17 @@ class LoginController: UIViewController {
         loginTextField = view.loginTextField
         passwordTextField = view.passwordTextField
         loginButton = view.loginButton
+        signupButton = view.signupButton
     
         loginButton?.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
+        signupButton?.addTarget(self, action: #selector(signupButtonDidTap), for: .touchUpInside)
     }
     
     @objc func loginButtonDidTap() {
         loginButtonDidTapDelegate?()
+    }
+    
+    @objc func signupButtonDidTap() {
+        signupButtonDidTapDelegate?()
     }
 }

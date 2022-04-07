@@ -16,6 +16,7 @@ class MainNavigationController: UINavigationController {
         super.viewDidLoad()
         let loginWindow = LoginController()
         loginWindow.loginButtonDidTapDelegate = loginInSystem
+        loginWindow.signupButtonDidTapDelegate = signupInSystem
         pushViewController(loginWindow, animated: true)
     }
     
@@ -24,6 +25,11 @@ class MainNavigationController: UINavigationController {
         imageCatalogWindow.settingsButtonDidTapDelegate = goToSettings
         imageCatalogWindow.getImageDelegate = goToEditorImage
         pushViewController(imageCatalogWindow, animated: true)
+    }
+    
+    func signupInSystem() {
+        let signupWindow = SignupController()
+        pushViewController(signupWindow, animated: true)
     }
     
     func goToEditorImage(image: ImageItem?) {

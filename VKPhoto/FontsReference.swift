@@ -9,8 +9,8 @@ import Foundation
 import UIKit
 
 public struct UIConst {
-//    static let headerTemp90Font = UIFont(name: "HelveticaNeue-Thin", size: 90)
-    static let logPasFont = UIFont(name: "HelveticaNeue-Bold", size: 25)
+    static let loginDescriptionFont = UIFont(name: "HelveticaNeue-Bold", size: 20)
     static let nicknameFont = UIFont(name: "HelveticaNeue-Medium", size: 20)
     static let tableHeaderFont = UIFont(name: "HelveticaNeue-Medium", size: 25)
+    static let signupDescriptionFont = UIFont(name: "HelveticaNeue-Bold", size: 16)
 }
