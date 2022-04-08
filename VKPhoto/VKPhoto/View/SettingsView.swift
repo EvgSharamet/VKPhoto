@@ -9,12 +9,15 @@ import Foundation
 import UIKit
 
 class SettingsView: UIView {
+    //MARK: - data
     
     let userIconImageView = UIImageView()
     let userNicknameLabel = UILabel()
     let headerView = UIView()
     let tableView = UITableView()
     let logoutButton = UIButton()
+    
+    //MARK: - internal functions
     
     func prepare() {
         self.backgroundColor = .white
@@ -24,7 +27,9 @@ class SettingsView: UIView {
         setupLogoutButton()
     }
     
-    func setupUserIconImageView() {
+    //MARK: - private functions
+    
+    private func setupUserIconImageView() {
         self.addSubview(userIconImageView)
         userIconImageView.translatesAutoresizingMaskIntoConstraints = false
         userIconImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
@@ -38,7 +43,7 @@ class SettingsView: UIView {
         userIconImageView.layer.masksToBounds = true
     }
     
-    func setupUserNickNameLabel() {
+    private func setupUserNickNameLabel() {
         self.addSubview(userNicknameLabel)
         userNicknameLabel.translatesAutoresizingMaskIntoConstraints = false
         userNicknameLabel.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor).isActive = true
@@ -50,7 +55,7 @@ class SettingsView: UIView {
         userNicknameLabel.font = UIConst.nicknameFont
     }
     
-    func setupTableView() {
+    private func setupTableView() {
         self.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
@@ -59,7 +64,7 @@ class SettingsView: UIView {
         tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
     
-    func setupLogoutButton() {
+    private func setupLogoutButton() {
         self.addSubview(logoutButton)
         logoutButton.translatesAutoresizingMaskIntoConstraints = false
         logoutButton.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor).isActive = true

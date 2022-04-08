@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 
 class UserService {
+    //MARK: - types
+    
     struct User: Codable {
         let login: String
         let password: String
@@ -21,12 +23,16 @@ class UserService {
         var activeUserIndex: Int?
     }
     
+    //MARK: - data
+    
     static let shared = UserService()
     var userChangedListener: (() -> Void)?
     let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent(storeFileName)
    
     private var data = UserData()
     private static let storeFileName = "catalog.data"
+    
+    //MARK: - internal functions
     
     func getUsers() -> [User] {
         return data.userList

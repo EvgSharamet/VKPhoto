@@ -9,6 +9,14 @@ import Foundation
 import UIKit
 
 class ImageCatalogController: UIViewController {
+    //MARK: - types
+    
+    private enum LayoutConstant {
+        static let spacing: CGFloat = 10.0
+        static let itemHeight: CGFloat = 150.0
+    }
+    
+    //MARK: - data
     
     var userIconImageView: UIImageView?
     var userIconImageButton: UIButton?
@@ -16,18 +24,14 @@ class ImageCatalogController: UIViewController {
     var settingsButton: UIButton?
     var imageCollection: UICollectionView?
     var plusButton: UIButton?
-    let imagePicker = UIImagePickerController()
-    static let identifier = "CollectionViewCell"
     var isEditingAvatar = true
-    
     var settingsButtonDidTapDelegate: (() ->  Void)?
     var getImageDelegate: ((ImageItem?) -> Void)?
+    static let identifier = "CollectionViewCell"
+    let imagePicker = UIImagePickerController()
     
-    private enum LayoutConstant {
-        static let spacing: CGFloat = 10.0
-        static let itemHeight: CGFloat = 150.0
-    }
-
+    //MARK: - internal functions
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let view = ImageCatalogView()
@@ -63,23 +67,24 @@ class ImageCatalogController: UIViewController {
         UserService.shared.userChangedListener = { self.viewDidLoad()}
     }
 
-    @objc func settingsButtonDidTap() {
+    //MARK: - internal functions
+    
+    @objc private func settingsButtonDidTap() {
         settingsButtonDidTapDelegate?()
     }
     
-    @objc func plusButtonDidTap() {
+    @objc private func plusButtonDidTap() {
         isEditingAvatar = false
         self.present(imagePicker, animated: true, completion: nil)
     }
     
-    @objc func userIconImageButtonDidTap() {
+    @objc private func userIconImageButtonDidTap() {
         isEditingAvatar = true
         self.present(imagePicker, animated: true, completion: nil)
     }
 }
 
 extension ImageCatalogController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
     //MARK: - internal functions
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {

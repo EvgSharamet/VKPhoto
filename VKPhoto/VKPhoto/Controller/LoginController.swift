@@ -9,13 +9,16 @@ import Foundation
 import UIKit
 
 class LoginController: UIViewController {
-    public var loginButtonDidTapDelegate: (() ->  Void)?
-    public var signupButtonDidTapDelegate: (() -> Void)?
+    //MARK: - data
     
     var loginTextField: UITextField?
     var passwordTextField: UITextField?
     var loginButton: UIButton?
     var signupButton: UIButton?
+    var loginButtonDidTapDelegate: (() ->  Void)?
+    var signupButtonDidTapDelegate: (() -> Void)?
+    
+    //MARK: - internal functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +36,9 @@ class LoginController: UIViewController {
         signupButton?.addTarget(self, action: #selector(signupButtonDidTap), for: .touchUpInside)
     }
 
-    @objc func loginButtonDidTap() {
+    //MARK: - internal functions
+    
+    @objc private func loginButtonDidTap() {
         if let login = loginTextField?.text?.trimmingCharacters(in: .whitespacesAndNewlines), !login.isEmpty,
            let password = passwordTextField?.text?.trimmingCharacters(in: .whitespacesAndNewlines), !password.isEmpty {
             if let activeUserIndex = UserService.shared.findUser(login: login, password: password) {
@@ -52,7 +57,7 @@ class LoginController: UIViewController {
         }
     }
     
-    @objc func signupButtonDidTap() {
+    @objc private func signupButtonDidTap() {
         signupButtonDidTapDelegate?()
     }
 }

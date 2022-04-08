@@ -9,11 +9,15 @@ import Foundation
 import UIKit
 
 class SignupController: UIViewController {
+    //MARK: - data
+    
     var nextButton: UIButton?
     var loginTextField: UITextField?
     var passwordTextField: UITextField?
-    public var nextButtonDidTapDelegate: (() -> Void)?
+    var nextButtonDidTapDelegate: (() -> Void)?
 
+    //MARK: - internal functions
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         hideKeyboardWhenTappedAround()
@@ -28,22 +32,29 @@ class SignupController: UIViewController {
         nextButton?.addTarget(self, action: #selector(nextButtonDidTap), for: .touchUpInside)
     }
     
-    @objc func nextButtonDidTap() {
+    //MARK: - private functions
+    
+    @objc private func nextButtonDidTap() {
         if let login = loginTextField?.text?.trimmingCharacters(in: .whitespacesAndNewlines), !login.isEmpty,
            let password = passwordTextField?.text?.trimmingCharacters(in: .whitespacesAndNewlines), !password.isEmpty {
-            
-            if let _ = UserService.shared.findUser(login: login, password: password) {
-                let signupAlert = UIAlertController(title: "User with the same login and password already exists", message: nil, preferredStyle: .alert)
+            if login.contains(" ") || password.contains(" ") {
+                let signupAlert = UIAlertController(title: "Username or password contains spaces", message: nil, preferredStyle: .alert)
                 signupAlert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
                 self.present(signupAlert, animated: true, completion: nil)
             } else {
-                let newUser = UserService.User(login: login, password: password, avatar: nil, imageСollection: [])
-                UserService.shared.setActiveUserIndex(index: (UserService.shared.addUser(newUser)))
-                UserService.shared.save()
-                nextButtonDidTapDelegate?()
+                if let _ = UserService.shared.findUser(login: login, password: password) {
+                    let signupAlert = UIAlertController(title: "User with the same login and password already exists", message: nil, preferredStyle: .alert)
+                    signupAlert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                    self.present(signupAlert, animated: true, completion: nil)
+                } else {
+                    let newUser = UserService.User(login: login, password: password, avatar: nil, imageСollection: [])
+                    UserService.shared.setActiveUserIndex(index: (UserService.shared.addUser(newUser)))
+                    UserService.shared.save()
+                    nextButtonDidTapDelegate?()
+                }
             }
         } else {
-            let signupAlert = UIAlertController(title: "The username or password is incorrect", message: nil, preferredStyle: .alert)
+            let signupAlert = UIAlertController(title: "Username or password is empty", message: nil, preferredStyle: .alert)
             signupAlert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
             self.present(signupAlert, animated: true, completion: nil)
         }
@@ -52,6 +63,8 @@ class SignupController: UIViewController {
 }
 
 extension UIViewController {
+    //MARK: - internal functions
+    
     func hideKeyboardWhenTappedAround() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false

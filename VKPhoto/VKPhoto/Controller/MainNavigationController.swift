@@ -15,7 +15,6 @@ class MainNavigationController: UINavigationController {
         super.viewDidLoad()
         let imageCatalogWindow = ImageCatalogController()
         imageCatalogWindow.settingsButtonDidTapDelegate = goToSettings
-        //imageCatalogWindow.getImageDelegate = goToEditorImage
         setViewControllers([imageCatalogWindow], animated: true)
     }
     

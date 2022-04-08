@@ -9,15 +9,19 @@ import Foundation
 import UIKit
 
 class LoginView: UIView {
+    //MARK: - data
     
-    let mainStackView = UIStackView()
-    let vkLogo = UIImageView()
     let loginLabel = UILabel()
     let loginTextField = UITextField()
     let passwordTextField = UITextField()
     let loginButton = UIButton()
     let signupButton = UIButton()
-    let signupLabel = UILabel()
+    
+    private let vkLogo = UIImageView()
+    private let mainStackView = UIStackView()
+    private let signupLabel = UILabel()
+    
+    //MARK: - internal functions
     
     func prepare() {
         self.backgroundColor = .white
@@ -33,7 +37,9 @@ class LoginView: UIView {
         setupSignupLabel()
     }
     
-    func setupVKLogo() {
+    //MARK: - private functions
+    
+    private func setupVKLogo() {
         self.addSubview(vkLogo)
         vkLogo.translatesAutoresizingMaskIntoConstraints = false
         vkLogo.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
@@ -46,7 +52,7 @@ class LoginView: UIView {
         vkLogo.contentMode = .scaleAspectFit
     }
     
-    func setupMainStackView() {
+    private func setupMainStackView() {
         self.addSubview(mainStackView)
         mainStackView.backgroundColor = .white
         mainStackView.axis = .vertical
@@ -62,14 +68,14 @@ class LoginView: UIView {
         mainStackView.backgroundColor = .white
     }
     
-    func setupLoginLabel() {
+    private func setupLoginLabel() {
         mainStackView.addArrangedSubview(loginLabel)
         loginLabel.text = "Sign in to VKPhoto"
         loginLabel.font = UIConst.loginDescriptionFont
         loginLabel.textAlignment = .left
     }
     
-    func setupLoginTextField() {
+    private func setupLoginTextField() {
         mainStackView.addArrangedSubview(loginTextField)
         loginTextField.translatesAutoresizingMaskIntoConstraints = false
         loginTextField.widthAnchor.constraint(equalTo: mainStackView.widthAnchor, constant: -20).isActive = true
@@ -81,7 +87,7 @@ class LoginView: UIView {
         loginTextField.textColor = .black
     }
     
-    func setupPasswordTextField() {
+    private func setupPasswordTextField() {
         mainStackView.addArrangedSubview(passwordTextField)
         passwordTextField.placeholder = "Password"
         passwordTextField.widthAnchor.constraint(equalTo: mainStackView.widthAnchor, constant: -20).isActive = true
@@ -92,7 +98,7 @@ class LoginView: UIView {
         passwordTextField.textColor = .black
     }
     
-    func setupLoginButton() {
+    private func setupLoginButton() {
         self.addSubview(loginButton)
         loginButton.translatesAutoresizingMaskIntoConstraints = false
         loginButton.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor).isActive = true
@@ -108,7 +114,7 @@ class LoginView: UIView {
         loginButton.layer.cornerRadius = 15
     }
     
-    func setupSignupButton() {
+    private func setupSignupButton() {
         self.addSubview(signupButton)
         signupButton.translatesAutoresizingMaskIntoConstraints = false
         signupButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
@@ -124,7 +130,7 @@ class LoginView: UIView {
         signupButton.layer.cornerRadius = 15
     }
     
-    func setupSignupLabel() {
+    private func setupSignupLabel() {
         self.addSubview(signupLabel)
         signupLabel.translatesAutoresizingMaskIntoConstraints = false
         signupLabel.bottomAnchor.constraint(equalTo: signupButton.topAnchor, constant: -10).isActive = true
@@ -140,6 +146,8 @@ class LoginView: UIView {
 }
 
 extension UITextField {
+    //MARK: - internal functions
+    
     func setLeftPaddingPoints(_ amount:CGFloat){
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: self.frame.size.height))
         self.leftView = paddingView

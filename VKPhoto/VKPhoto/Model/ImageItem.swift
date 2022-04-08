@@ -18,7 +18,6 @@ struct ImageItemRepo: Codable {
 }
 
 extension ImageItem {
-    
     //MARK: - internal functions
     
     func getImage() -> UIImage? {

@@ -9,12 +9,17 @@ import Foundation
 import UIKit
 
 class SignupView: UIView {
-    let mainStackView = UIStackView()
+    //MARK: - data
+
     let vkLogo = UIImageView()
-    let loginLabel = UILabel()
     let loginTextField = UITextField()
     let passwordTextField = UITextField()
     let nextButton = UIButton()
+    
+    private let mainStackView = UIStackView()
+    private let loginLabel = UILabel()
+    
+    //MARK: - internal functions
     
     func prepare() {
         self.backgroundColor = .white
@@ -28,7 +33,9 @@ class SignupView: UIView {
         setupNextButton()
     }
     
-    func setupVKLogo() {
+    //MARK: - private functions
+    
+    private func setupVKLogo() {
         self.addSubview(vkLogo)
         vkLogo.translatesAutoresizingMaskIntoConstraints = false
         vkLogo.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
@@ -41,7 +48,7 @@ class SignupView: UIView {
         vkLogo.contentMode = .scaleAspectFit
     }
     
-    func setupMainStackView() {
+    private func setupMainStackView() {
         self.addSubview(mainStackView)
         mainStackView.backgroundColor = .white
         mainStackView.axis = .vertical
@@ -57,14 +64,14 @@ class SignupView: UIView {
         mainStackView.backgroundColor = .white
     }
     
-    func setupLoginLabel() {
+    private func setupLoginLabel() {
         mainStackView.addArrangedSubview(loginLabel)
         loginLabel.text = "Enter your login and password:"
         loginLabel.font = UIConst.loginDescriptionFont
         loginLabel.textAlignment = .left
     }
     
-    func setupLoginTextField() {
+    private func setupLoginTextField() {
         mainStackView.addArrangedSubview(loginTextField)
         loginTextField.translatesAutoresizingMaskIntoConstraints = false
         loginTextField.widthAnchor.constraint(equalTo: mainStackView.widthAnchor, constant: -20).isActive = true
@@ -76,7 +83,7 @@ class SignupView: UIView {
         loginTextField.textColor = .black
     }
     
-    func setupPasswordTextField() {
+    private func setupPasswordTextField() {
         mainStackView.addArrangedSubview(passwordTextField)
         passwordTextField.placeholder = "Password"
         passwordTextField.widthAnchor.constraint(equalTo: mainStackView.widthAnchor, constant: -20).isActive = true
@@ -87,7 +94,7 @@ class SignupView: UIView {
         passwordTextField.textColor = .black
     }
     
-    func setupNextButton() {
+    private func setupNextButton() {
         self.addSubview(nextButton)
         nextButton.translatesAutoresizingMaskIntoConstraints = false
         nextButton.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor).isActive = true
