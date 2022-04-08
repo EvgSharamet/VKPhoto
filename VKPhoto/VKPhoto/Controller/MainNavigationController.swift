@@ -14,10 +14,20 @@ class MainNavigationController: UINavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let loginWindow = LoginController()
-        loginWindow.loginButtonDidTapDelegate = loginInSystem
-        loginWindow.signupButtonDidTapDelegate = signupInSystem
-        pushViewController(loginWindow, animated: true)
+        let imageCatalogWindow = ImageCatalogController()
+        imageCatalogWindow.settingsButtonDidTapDelegate = goToSettings
+        imageCatalogWindow.getImageDelegate = goToEditorImage
+        pushViewController(imageCatalogWindow, animated: true)
+        
+        let activeUserIndex = UserService.shared.getActiveUserIndex()
+        print(activeUserIndex)
+        
+        if activeUserIndex == nil {
+            let loginWindow = LoginController()
+            loginWindow.loginButtonDidTapDelegate = loginInSystem
+            loginWindow.signupButtonDidTapDelegate = signupInSystem
+            pushViewController(loginWindow, animated: true)
+        }
     }
     
     func loginInSystem() {

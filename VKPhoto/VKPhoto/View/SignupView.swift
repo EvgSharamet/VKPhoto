@@ -73,18 +73,18 @@ class SignupView: UIView {
         loginTextField.placeholder = "Login"
         loginTextField.backgroundColor = .systemGray6
         loginTextField.textAlignment = .left
-        loginTextField.textColor = .lightGray
+        loginTextField.textColor = .black
     }
     
     func setupPasswordTextField() {
         mainStackView.addArrangedSubview(passwordTextField)
-        passwordTextField.text = "Password"
+        passwordTextField.placeholder = "Password"
         passwordTextField.widthAnchor.constraint(equalTo: mainStackView.widthAnchor, constant: -20).isActive = true
         passwordTextField.layer.cornerRadius = 10
         passwordTextField.setLeftPaddingPoints(20)
         passwordTextField.backgroundColor = .systemGray6
         passwordTextField.textAlignment = .left
-        passwordTextField.textColor = .lightGray
+        passwordTextField.textColor = .black
     }
     
     func setupNextButton() {

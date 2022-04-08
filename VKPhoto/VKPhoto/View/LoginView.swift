@@ -78,7 +78,7 @@ class LoginView: UIView {
         loginTextField.placeholder = "Login"
         loginTextField.backgroundColor = .systemGray6
         loginTextField.textAlignment = .left
-        loginTextField.textColor = .lightGray
+        loginTextField.textColor = .black
     }
     
     func setupPasswordTextField() {
@@ -89,7 +89,7 @@ class LoginView: UIView {
         passwordTextField.setLeftPaddingPoints(20)
         passwordTextField.backgroundColor = .systemGray6
         passwordTextField.textAlignment = .left
-        passwordTextField.textColor = .lightGray
+        passwordTextField.textColor = .black
     }
     
     func setupLoginButton() {

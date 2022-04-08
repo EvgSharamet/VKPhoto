@@ -37,6 +37,7 @@ class LoginController: UIViewController {
         if let login = loginTextField?.text, let password = passwordTextField?.text {
             if let activeUserIndex = UserService.shared.findUser(login: login, password: password) {
                 UserService.shared.setActiveUserIndex(index: activeUserIndex)
+                UserService.shared.save()
                 loginButtonDidTapDelegate?()
             } else {
                 let loginAlert = UIAlertController(title: "No such user exists", message: nil, preferredStyle: .alert)

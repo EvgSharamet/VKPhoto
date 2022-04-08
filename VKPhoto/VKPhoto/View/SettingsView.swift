@@ -34,7 +34,7 @@ class SettingsView: UIView {
         userIconImageView.layer.cornerRadius = 50
         userIconImageView.image = UIImage(named: "dogTemplate")
         userIconImageView.contentMode = .scaleAspectFit
-        userIconImageView.backgroundColor = .green.withAlphaComponent(0.5)
+        userIconImageView.backgroundColor = .lightGray.withAlphaComponent(0.5)
         userIconImageView.layer.masksToBounds = true
     }
     

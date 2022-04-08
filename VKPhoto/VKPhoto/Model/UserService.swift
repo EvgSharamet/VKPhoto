@@ -25,10 +25,9 @@ class UserService {
     
     static let shared = UserService()
     let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent(storeFileName)
-    
-    private static let storeFileName = "catalog.data"
-    private var activeUserIndex: Int?
+   
     private var data = UserData()
+    private static let storeFileName = "catalog.data"
     private var dataChangedListeners = [DataChangedListener]()
     
     func getUsers() -> [User] {
@@ -49,7 +48,7 @@ class UserService {
     }
     
     func getActiveUserIndex() -> Int? {
-        return activeUserIndex
+        return data.activeUserIndex
     }
     
     func setActiveUserIndex(index: Int?) {

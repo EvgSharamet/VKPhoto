@@ -112,7 +112,6 @@ class TableViewCell: UITableViewCell {
         userNicknameLabel.text = "USER_NICKNAME"
     }
     
-    
     override func prepareForReuse() {
         super.prepareForReuse()
         self.accessoryType = .none
