@@ -9,55 +9,51 @@ import Foundation
 import UIKit
 
 class MainNavigationController: UINavigationController {
-    
     //MARK: - internal functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let imageCatalogWindow = ImageCatalogController()
         imageCatalogWindow.settingsButtonDidTapDelegate = goToSettings
-        imageCatalogWindow.getImageDelegate = goToEditorImage
-        pushViewController(imageCatalogWindow, animated: true)
-        
-        let activeUserIndex = UserService.shared.getActiveUserIndex()
-        print(activeUserIndex)
-        
-        if activeUserIndex == nil {
-            let loginWindow = LoginController()
-            loginWindow.loginButtonDidTapDelegate = loginInSystem
-            loginWindow.signupButtonDidTapDelegate = signupInSystem
-            pushViewController(loginWindow, animated: true)
-        }
+        //imageCatalogWindow.getImageDelegate = goToEditorImage
+        setViewControllers([imageCatalogWindow], animated: true)
     }
     
-    func loginInSystem() {
-        let imageCatalogWindow = ImageCatalogController()
-        imageCatalogWindow.settingsButtonDidTapDelegate = goToSettings
-        imageCatalogWindow.getImageDelegate = goToEditorImage
-        pushViewController(imageCatalogWindow, animated: true)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        checkAuthorization()
     }
     
-    func signupInSystem() {
-        let signupWindow = SignupController()
-        signupWindow.nextButtonDidTapDelegate = loginInSystem
-        pushViewController(signupWindow, animated: true)
-    }
+    //MARK: - private functions
     
-    func goToEditorImage(image: ImageItem?) {
-        let editorWindow = EditorImageController()
-        editorWindow.fullImage = image
-        pushViewController(editorWindow, animated: true)
-    }
-    
-    func goToSettings() {
+    private func goToSettings() {
         let settingsWindow = SettingsController()
         settingsWindow.logoutButtonDidTapDelegate = logoutOfSystem
         pushViewController(settingsWindow, animated: true)
     }
     
-    func logoutOfSystem() {
-        let loginWindow = LoginController()
-        loginWindow.loginButtonDidTapDelegate = loginInSystem
-        pushViewController(loginWindow, animated: true)
+    private func logoutOfSystem() {
+        popToRootViewController(animated: true)
+        checkAuthorization()
+    }
+    
+    private func checkAuthorization() {
+        let activeUserIndex = UserService.shared.getActiveUserIndex()
+        
+        if activeUserIndex == nil {
+            let loginWindow = LoginController()
+            loginWindow.modalPresentationStyle = .fullScreen
+            loginWindow.loginButtonDidTapDelegate = onUserAuthorized
+            loginWindow.signupButtonDidTapDelegate = {
+                let signupWindow = SignupController()
+                signupWindow.nextButtonDidTapDelegate = self.onUserAuthorized
+                loginWindow.present(signupWindow, animated: true)
+            }
+            present(loginWindow, animated: true)
+        }
+    }
+    
+    private func onUserAuthorized() {
+        dismiss(animated: true) 
     }
 }

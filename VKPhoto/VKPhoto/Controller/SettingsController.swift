@@ -46,6 +46,7 @@ class SettingsController: UIViewController {
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
         let submitAction = UIAlertAction(title: "OK", style: .default) { _ in
             UserService.shared.setActiveUserIndex(index: nil)
+            UserService.shared.save()
             self.logoutButtonDidTapDelegate?()
         }
         logoutAlert.addAction(submitAction)

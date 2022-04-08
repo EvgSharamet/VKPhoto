@@ -59,6 +59,8 @@ class ImageCatalogController: UIViewController {
             userIconImageView?.image = userAvatar
         }
         userNicknameLabel?.text = activeUser.login
+        
+        UserService.shared.userChangedListener = { self.viewDidLoad()}
     }
 
     @objc func settingsButtonDidTap() {

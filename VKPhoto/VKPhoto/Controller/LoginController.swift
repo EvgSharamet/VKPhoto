@@ -34,7 +34,8 @@ class LoginController: UIViewController {
     }
 
     @objc func loginButtonDidTap() {
-        if let login = loginTextField?.text, let password = passwordTextField?.text {
+        if let login = loginTextField?.text?.trimmingCharacters(in: .whitespacesAndNewlines), !login.isEmpty,
+           let password = passwordTextField?.text?.trimmingCharacters(in: .whitespacesAndNewlines), !password.isEmpty {
             if let activeUserIndex = UserService.shared.findUser(login: login, password: password) {
                 UserService.shared.setActiveUserIndex(index: activeUserIndex)
                 UserService.shared.save()

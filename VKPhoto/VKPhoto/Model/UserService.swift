@@ -21,14 +21,12 @@ class UserService {
         var activeUserIndex: Int?
     }
     
-    typealias DataChangedListener = () -> Void
-    
     static let shared = UserService()
+    var userChangedListener: (() -> Void)?
     let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent(storeFileName)
    
     private var data = UserData()
     private static let storeFileName = "catalog.data"
-    private var dataChangedListeners = [DataChangedListener]()
     
     func getUsers() -> [User] {
         return data.userList
@@ -62,6 +60,7 @@ class UserService {
             let encoder = JSONEncoder()
             let data = try encoder.encode(dataForJson)
             try data.write(to: url, options: [])
+            userChangedListener?()
         } catch { }
     }
     

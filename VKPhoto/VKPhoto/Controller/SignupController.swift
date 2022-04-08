@@ -29,7 +29,9 @@ class SignupController: UIViewController {
     }
     
     @objc func nextButtonDidTap() {
-        if let login = loginTextField?.text, let password = passwordTextField?.text {
+        if let login = loginTextField?.text?.trimmingCharacters(in: .whitespacesAndNewlines), !login.isEmpty,
+           let password = passwordTextField?.text?.trimmingCharacters(in: .whitespacesAndNewlines), !password.isEmpty {
+            
             if let _ = UserService.shared.findUser(login: login, password: password) {
                 let signupAlert = UIAlertController(title: "User with the same login and password already exists", message: nil, preferredStyle: .alert)
                 signupAlert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
@@ -37,6 +39,7 @@ class SignupController: UIViewController {
             } else {
                 let newUser = UserService.User(login: login, password: password, avatar: nil, imageСollection: [])
                 UserService.shared.setActiveUserIndex(index: (UserService.shared.addUser(newUser)))
+                UserService.shared.save()
                 nextButtonDidTapDelegate?()
             }
         } else {
