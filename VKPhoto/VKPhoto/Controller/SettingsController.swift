@@ -17,6 +17,7 @@ class SettingsController: UIViewController {
     private var userNicknameLabel: UILabel?
     private var tableView: UITableView?
     private var logoutButton: UIButton?
+    private static let identifier = "TableViewCell"
     
     //MARK: - internal functions
     
@@ -69,7 +70,7 @@ extension SettingsController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView?.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
+        let cell = self.tableView?.dequeueReusableCell(withIdentifier: SettingsController.identifier, for: indexPath) as! TableViewCell
         cell.prepare()
         let user = (UserService.shared.getUsers())[indexPath.row]
         if let userAvatar = user.avatar?.getImage() {
