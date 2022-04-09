@@ -13,10 +13,6 @@ struct ImageItem: Codable {
     var filter: String?
 }
 
-struct ImageItemRepo: Codable {
-    var items: [ImageItem]
-}
-
 extension ImageItem {
     //MARK: - internal functions
     

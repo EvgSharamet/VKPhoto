@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		855DE32F2801BBBA00116AE6 /* ConstraintsForView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855DE32E2801BBBA00116AE6 /* ConstraintsForView.swift */; };
+		855DE3312801BBE300116AE6 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855DE3302801BBE300116AE6 /* UIViewControllerExtensions.swift */; };
 		85A942D127FAF4F700425A36 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A942D027FAF4F700425A36 /* AppDelegate.swift */; };
 		85A942D327FAF4F700425A36 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A942D227FAF4F700425A36 /* SceneDelegate.swift */; };
 		85A942DB27FAF4F700425A36 /* VKPhoto.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 85A942D927FAF4F700425A36 /* VKPhoto.xcdatamodeld */; };
@@ -15,7 +17,6 @@
 		85A942E827FAF95F00425A36 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A942E727FAF95F00425A36 /* MainNavigationController.swift */; };
 		85A942EA27FAFA1A00425A36 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A942E927FAFA1A00425A36 /* LoginController.swift */; };
 		85A942EF27FAFB6D00425A36 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A942EE27FAFB6D00425A36 /* LoginView.swift */; };
-		85A942F127FAFD3F00425A36 /* ConstraintsForView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A942F027FAFD3F00425A36 /* ConstraintsForView.swift */; };
 		85A942F327FB25BB00425A36 /* FontsReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A942F227FB25BB00425A36 /* FontsReference.swift */; };
 		85A942F527FB449800425A36 /* ImageCatalogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A942F427FB449800425A36 /* ImageCatalogController.swift */; };
 		85A942F927FB52F800425A36 /* ImageCatalogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A942F827FB52F800425A36 /* ImageCatalogView.swift */; };
@@ -28,6 +29,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		855DE32E2801BBBA00116AE6 /* ConstraintsForView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintsForView.swift; sourceTree = "<group>"; };
+		855DE3302801BBE300116AE6 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
 		85A942CD27FAF4F700425A36 /* VKPhoto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKPhoto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85A942D027FAF4F700425A36 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85A942D227FAF4F700425A36 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -38,7 +41,6 @@
 		85A942E727FAF95F00425A36 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		85A942E927FAFA1A00425A36 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		85A942EE27FAFB6D00425A36 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		85A942F027FAFD3F00425A36 /* ConstraintsForView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintsForView.swift; sourceTree = "<group>"; };
 		85A942F227FB25BB00425A36 /* FontsReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsReference.swift; sourceTree = "<group>"; };
 		85A942F427FB449800425A36 /* ImageCatalogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCatalogController.swift; sourceTree = "<group>"; };
 		85A942F827FB52F800425A36 /* ImageCatalogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCatalogView.swift; sourceTree = "<group>"; };
@@ -61,10 +63,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		855DE32D2801BB7400116AE6 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				855DE32E2801BBBA00116AE6 /* ConstraintsForView.swift */,
+				855DE3302801BBE300116AE6 /* UIViewControllerExtensions.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		85A942C427FAF4F700425A36 = {
 			isa = PBXGroup;
 			children = (
-				85A942F027FAFD3F00425A36 /* ConstraintsForView.swift */,
 				85A942F227FB25BB00425A36 /* FontsReference.swift */,
 				85A942CF27FAF4F700425A36 /* VKPhoto */,
 				85A942CE27FAF4F700425A36 /* Products */,
@@ -82,6 +92,7 @@
 		85A942CF27FAF4F700425A36 /* VKPhoto */ = {
 			isa = PBXGroup;
 			children = (
+				855DE32D2801BB7400116AE6 /* Utils */,
 				85A942ED27FAFB4D00425A36 /* Model */,
 				85A942EC27FAFB3900425A36 /* Controller */,
 				85A942EB27FAFB2C00425A36 /* View */,
@@ -201,15 +212,16 @@
 				85A942FB27FB63E100425A36 /* SettingsController.swift in Sources */,
 				85A942F927FB52F800425A36 /* ImageCatalogView.swift in Sources */,
 				85D834F427FC9CDA00706E57 /* UserService.swift in Sources */,
+				855DE3312801BBE300116AE6 /* UIViewControllerExtensions.swift in Sources */,
 				85A942F327FB25BB00425A36 /* FontsReference.swift in Sources */,
 				85A942EF27FAFB6D00425A36 /* LoginView.swift in Sources */,
 				85A942F527FB449800425A36 /* ImageCatalogController.swift in Sources */,
 				85A942E827FAF95F00425A36 /* MainNavigationController.swift in Sources */,
 				85D12A9227FEF9EA0094C7BF /* SignupController.swift in Sources */,
+				855DE32F2801BBBA00116AE6 /* ConstraintsForView.swift in Sources */,
 				85A942D127FAF4F700425A36 /* AppDelegate.swift in Sources */,
 				85D834EC27FC527A00706E57 /* ImageItem.swift in Sources */,
 				85A942D327FAF4F700425A36 /* SceneDelegate.swift in Sources */,
-				85A942F127FAFD3F00425A36 /* ConstraintsForView.swift in Sources */,
 				85A942DB27FAF4F700425A36 /* VKPhoto.xcdatamodeld in Sources */,
 				85A942EA27FAFA1A00425A36 /* LoginController.swift in Sources */,
 				85A942FD27FB63F000425A36 /* SettingsView.swift in Sources */,
