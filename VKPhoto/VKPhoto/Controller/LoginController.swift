@@ -11,12 +11,13 @@ import UIKit
 class LoginController: UIViewController {
     //MARK: - data
     
-    var loginTextField: UITextField?
-    var passwordTextField: UITextField?
-    var loginButton: UIButton?
-    var signupButton: UIButton?
     var loginButtonDidTapDelegate: (() ->  Void)?
     var signupButtonDidTapDelegate: (() -> Void)?
+    
+    private var loginTextField: UITextField?
+    private var passwordTextField: UITextField?
+    private var loginButton: UIButton?
+    private var signupButton: UIButton?
     
     //MARK: - internal functions
     
@@ -36,7 +37,7 @@ class LoginController: UIViewController {
         signupButton?.addTarget(self, action: #selector(signupButtonDidTap), for: .touchUpInside)
     }
 
-    //MARK: - internal functions
+    //MARK: - private functions
     
     @objc private func loginButtonDidTap() {
         if let login = loginTextField?.text?.trimmingCharacters(in: .whitespacesAndNewlines), !login.isEmpty,

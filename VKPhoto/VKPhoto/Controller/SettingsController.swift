@@ -9,12 +9,16 @@ import Foundation
 import UIKit
 
 class SettingsController: UIViewController {
-
-    var userIconImageView: UIImageView?
-    var userNicknameLabel: UILabel?
-    var tableView: UITableView?
-    var logoutButton: UIButton?
+    //MARK: - data
+    
     var logoutButtonDidTapDelegate : (() ->  Void)?
+    
+    private var userIconImageView: UIImageView?
+    private var userNicknameLabel: UILabel?
+    private var tableView: UITableView?
+    private var logoutButton: UIButton?
+    
+    //MARK: - internal functions
     
     override func viewDidLoad() {
         super.viewDidLoad()

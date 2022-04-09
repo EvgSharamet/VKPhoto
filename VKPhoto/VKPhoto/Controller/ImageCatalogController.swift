@@ -18,17 +18,17 @@ class ImageCatalogController: UIViewController {
     
     //MARK: - data
     
-    var userIconImageView: UIImageView?
-    var userIconImageButton: UIButton?
-    var userNicknameLabel: UILabel?
-    var settingsButton: UIButton?
-    var imageCollection: UICollectionView?
-    var plusButton: UIButton?
-    var isEditingAvatar = true
     var settingsButtonDidTapDelegate: (() ->  Void)?
-    var getImageDelegate: ((ImageItem?) -> Void)?
-    static let identifier = "CollectionViewCell"
-    let imagePicker = UIImagePickerController()
+    
+    private var userIconImageView: UIImageView?
+    private var userIconImageButton: UIButton?
+    private var userNicknameLabel: UILabel?
+    private var settingsButton: UIButton?
+    private var imageCollection: UICollectionView?
+    private var plusButton: UIButton?
+    private var isEditingAvatar = true
+    private static let identifier = "CollectionViewCell"
+    private let imagePicker = UIImagePickerController()
     
     //MARK: - internal functions
     

@@ -10,11 +10,11 @@ import UIKit
 
 class SignupController: UIViewController {
     //MARK: - data
-    
-    var nextButton: UIButton?
-    var loginTextField: UITextField?
-    var passwordTextField: UITextField?
     var nextButtonDidTapDelegate: (() -> Void)?
+    
+    private var nextButton: UIButton?
+    private var loginTextField: UITextField?
+    private var passwordTextField: UITextField?
 
     //MARK: - internal functions
     
