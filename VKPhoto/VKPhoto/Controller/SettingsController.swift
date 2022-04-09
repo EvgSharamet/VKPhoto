@@ -34,6 +34,7 @@ class SettingsController: UIViewController {
         super.viewDidLoad()
         let view = SettingsView()
         self.view.addSubview(view)
+        view.translatesAutoresizingMaskIntoConstraints = false
         view.stretch()
         
         self.tableView = view.tableView

@@ -36,6 +36,7 @@ class LoginController: UIViewController {
         hideKeyboardWhenTappedAround()
         let view = LoginView()
         self.view.addSubview(view)
+        view.translatesAutoresizingMaskIntoConstraints = false
         view.stretch()
         
         loginTextField = view.loginTextField

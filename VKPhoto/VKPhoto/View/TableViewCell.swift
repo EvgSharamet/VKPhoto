@@ -33,7 +33,11 @@ class TableViewCell: UITableViewCell {
     
     func configure(cellData: CellData){
         userNicknameLabel.text = cellData.username
-        userIconImageView.image = cellData.avatar
+        if cellData.avatar == nil {
+            userIconImageView.image = UIImage(named: "dogTemplate")
+        } else {
+            userIconImageView.image = cellData.avatar
+        }
     }
     
     //MARK: - private functions
@@ -58,7 +62,6 @@ class TableViewCell: UITableViewCell {
         userIconImageView.backgroundColor = .lightGray
         userIconImageView.contentMode = .scaleAspectFit
         userIconImageView.layer.masksToBounds = true
-        userIconImageView.image = UIImage(named: "dogTemplate")
     }
     
     private func setupUserNicknameLabel() {

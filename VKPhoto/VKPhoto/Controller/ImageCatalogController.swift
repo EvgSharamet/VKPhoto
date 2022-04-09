@@ -39,12 +39,18 @@ class ImageCatalogController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.userService.userChangedListener = { self.viewDidLoad() }
+    }
+    
     //MARK: - internal functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let view = ImageCatalogView()
         self.view.addSubview(view)
+        view.translatesAutoresizingMaskIntoConstraints = false
         view.stretch()
         
         self.userIconImageView = view.userIconImageView
@@ -69,8 +75,6 @@ class ImageCatalogController: UIViewController {
             userIconImageView?.image = userAvatar
         }
         userNicknameLabel?.text = activeUser.login
-        
-        userService.userChangedListener = { self.viewDidLoad()}
     }
 
     //MARK: - internal functions

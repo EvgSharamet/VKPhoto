@@ -12,7 +12,9 @@ struct User: Codable {
     var imageСollection: [ImageItem]
 }
 
-protocol IUserService {
+protocol IUserService: AnyObject {
+    var userChangedListener: (() -> Void)? { get set }
+    
     func getUsers() -> [User]
     func addUser(_ user: User) -> Int
     func removeUser(index: Int)
