@@ -31,7 +31,6 @@ class TableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     func configure(cellData: CellData){
         userNicknameLabel.text = cellData.username
         userIconImageView.image = cellData.avatar

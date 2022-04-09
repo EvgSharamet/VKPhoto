@@ -33,7 +33,7 @@ class ImageCatalogController: UIViewController {
         super.viewDidLoad()
         let view = ImageCatalogView()
         self.view = view
-        view.prepare()
+        view.stretch()
         
         self.userIconImageView = view.userIconImageView
         self.userNicknameLabel = view.userNicknameLabel
@@ -133,10 +133,9 @@ extension ImageCatalogController: UICollectionViewDataSource, UICollectionViewDe
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCatalogController.identifier, for: indexPath) as! CollectionCell
-        cell.prepare()
         guard let activeUserIndex = UserService.shared.getActiveUserIndex() else { return cell }
         let activeUser = (UserService.shared.getUsers())[activeUserIndex]
-        cell.imageView.image = activeUser.imageСollection[indexPath.row].getImage()
+        cell.configure(image: activeUser.imageСollection[indexPath.row].getImage())
         return cell
     }
 }

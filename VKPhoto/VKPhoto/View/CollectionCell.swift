@@ -9,9 +9,28 @@ import Foundation
 import UIKit
 
 class CollectionCell: UICollectionViewCell {
+    //MARK: - data
+    
     let imageView = UIImageView()
     
-    func prepare() {
+    //MARK: - public functions
+    
+    override init(frame: CGRect) {
+        super.init(frame: .zero)
+        prepare()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configure(image: UIImage?){
+        imageView.image = image
+    }
+    
+    //MARK: - private functions
+    
+     private func prepare() {
         self.contentView.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.stretch()

@@ -24,7 +24,7 @@ class LoginController: UIViewController {
         hideKeyboardWhenTappedAround()
         let view = LoginView()
         self.view.addSubview(view)
-        view.prepare()
+        view.stretch()
         
         loginTextField = view.loginTextField
         passwordTextField = view.passwordTextField

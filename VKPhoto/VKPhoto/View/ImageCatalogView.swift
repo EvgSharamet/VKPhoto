@@ -23,9 +23,20 @@ class ImageCatalogView: UIView {
     }()
     let plusButton = UIButton()
     
-    //MARK: - internal functions
+    //MARK: - public functions
     
-    func prepare() {
+    init() {
+        super.init(frame: .zero)
+        prepare()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: - private functions
+    
+    private func prepare() {
         self.backgroundColor = .white
         setupUserNickNameLabel()
         setupUserIconImageView()
@@ -35,8 +46,6 @@ class ImageCatalogView: UIView {
         setupImageCollection()
         setupPlusButton()
       }
-    
-    //MARK: - private functions
     
     private func setupUserNickNameLabel() {
         self.addSubview(userNicknameLabel)

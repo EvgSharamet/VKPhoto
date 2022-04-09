@@ -22,7 +22,6 @@ class SettingsController: UIViewController {
         super.viewDidLoad()
         let view = SettingsView()
         self.view = view
-        view.prepare()
         
         self.tableView = view.tableView
         tableView?.delegate = self

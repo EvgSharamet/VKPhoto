@@ -22,7 +22,7 @@ class SignupController: UIViewController {
         hideKeyboardWhenTappedAround()
         let view = SignupView()
         self.view.addSubview(view)
-        view.prepare()
+        view.stretch()
         
         self.loginTextField = view.loginTextField
         self.passwordTextField = view.passwordTextField
