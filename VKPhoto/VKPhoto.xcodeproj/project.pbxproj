@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		855DE32F2801BBBA00116AE6 /* ConstraintsForView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855DE32E2801BBBA00116AE6 /* ConstraintsForView.swift */; };
 		855DE3312801BBE300116AE6 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855DE3302801BBE300116AE6 /* UIViewControllerExtensions.swift */; };
+		855DE3332801BEEE00116AE6 /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855DE3322801BEEE00116AE6 /* CollectionCell.swift */; };
 		85A942D127FAF4F700425A36 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A942D027FAF4F700425A36 /* AppDelegate.swift */; };
 		85A942D327FAF4F700425A36 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A942D227FAF4F700425A36 /* SceneDelegate.swift */; };
 		85A942DB27FAF4F700425A36 /* VKPhoto.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 85A942D927FAF4F700425A36 /* VKPhoto.xcdatamodeld */; };
@@ -31,6 +32,7 @@
 /* Begin PBXFileReference section */
 		855DE32E2801BBBA00116AE6 /* ConstraintsForView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintsForView.swift; sourceTree = "<group>"; };
 		855DE3302801BBE300116AE6 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
+		855DE3322801BEEE00116AE6 /* CollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCell.swift; sourceTree = "<group>"; };
 		85A942CD27FAF4F700425A36 /* VKPhoto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKPhoto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85A942D027FAF4F700425A36 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85A942D227FAF4F700425A36 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				85A942F827FB52F800425A36 /* ImageCatalogView.swift */,
 				85A942FC27FB63F000425A36 /* SettingsView.swift */,
 				85D12A9327FEFA330094C7BF /* SignupView.swift */,
+				855DE3322801BEEE00116AE6 /* CollectionCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -219,6 +222,7 @@
 				85A942E827FAF95F00425A36 /* MainNavigationController.swift in Sources */,
 				85D12A9227FEF9EA0094C7BF /* SignupController.swift in Sources */,
 				855DE32F2801BBBA00116AE6 /* ConstraintsForView.swift in Sources */,
+				855DE3332801BEEE00116AE6 /* CollectionCell.swift in Sources */,
 				85A942D127FAF4F700425A36 /* AppDelegate.swift in Sources */,
 				85D834EC27FC527A00706E57 /* ImageItem.swift in Sources */,
 				85A942D327FAF4F700425A36 /* SceneDelegate.swift in Sources */,

@@ -27,12 +27,12 @@ class UserService {
     
     static let shared = UserService()
     var userChangedListener: (() -> Void)?
-    let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent(storeFileName)
+    private let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent(storeFileName)
    
     private var data = UserData()
     private static let storeFileName = "catalog.data"
     
-    //MARK: - internal functions
+    //MARK: - public functions
     
     func getUsers() -> [User] {
         return data.userList

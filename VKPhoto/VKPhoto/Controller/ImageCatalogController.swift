@@ -147,10 +147,6 @@ extension ImageCatalogController: UICollectionViewDataSource, UICollectionViewDe
     }
 }
 
-protocol ReusableView: AnyObject {
-    static var identifier: String { get }
-}
-
 extension ImageCatalogController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -168,15 +164,3 @@ extension ImageCatalogController: UICollectionViewDelegateFlowLayout {
         return floor(finalWidth)
     }
 }
-
-class CollectionCell: UICollectionViewCell {
-    let imageView = UIImageView()
-    
-    func prepare() {
-        self.contentView.addSubview(imageView)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.stretch()
-        imageView.contentMode = .scaleAspectFit
-    }
-}
-
