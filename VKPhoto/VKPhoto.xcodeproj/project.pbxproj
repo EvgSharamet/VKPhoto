@@ -11,6 +11,7 @@
 		855DE3312801BBE300116AE6 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855DE3302801BBE300116AE6 /* UIViewControllerExtensions.swift */; };
 		855DE3332801BEEE00116AE6 /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855DE3322801BEEE00116AE6 /* CollectionCell.swift */; };
 		855DE3352801BFD500116AE6 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855DE3342801BFD500116AE6 /* TableViewCell.swift */; };
+		855DE3372801C44900116AE6 /* UITextFieldExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855DE3362801C44900116AE6 /* UITextFieldExtensions.swift */; };
 		85A942D127FAF4F700425A36 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A942D027FAF4F700425A36 /* AppDelegate.swift */; };
 		85A942D327FAF4F700425A36 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A942D227FAF4F700425A36 /* SceneDelegate.swift */; };
 		85A942DB27FAF4F700425A36 /* VKPhoto.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 85A942D927FAF4F700425A36 /* VKPhoto.xcdatamodeld */; };
@@ -35,6 +36,7 @@
 		855DE3302801BBE300116AE6 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
 		855DE3322801BEEE00116AE6 /* CollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCell.swift; sourceTree = "<group>"; };
 		855DE3342801BFD500116AE6 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		855DE3362801C44900116AE6 /* UITextFieldExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtensions.swift; sourceTree = "<group>"; };
 		85A942CD27FAF4F700425A36 /* VKPhoto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKPhoto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85A942D027FAF4F700425A36 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85A942D227FAF4F700425A36 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 			children = (
 				855DE32E2801BBBA00116AE6 /* ConstraintsForView.swift */,
 				855DE3302801BBE300116AE6 /* UIViewControllerExtensions.swift */,
+				855DE3362801C44900116AE6 /* UITextFieldExtensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -231,6 +234,7 @@
 				85D834EC27FC527A00706E57 /* ImageItem.swift in Sources */,
 				85A942D327FAF4F700425A36 /* SceneDelegate.swift in Sources */,
 				85A942DB27FAF4F700425A36 /* VKPhoto.xcdatamodeld in Sources */,
+				855DE3372801C44900116AE6 /* UITextFieldExtensions.swift in Sources */,
 				85A942EA27FAFA1A00425A36 /* LoginController.swift in Sources */,
 				85A942FD27FB63F000425A36 /* SettingsView.swift in Sources */,
 			);

@@ -71,12 +71,12 @@ extension SettingsController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView?.dequeueReusableCell(withIdentifier: SettingsController.identifier, for: indexPath) as! TableViewCell
-        cell.prepare()
         let user = (UserService.shared.getUsers())[indexPath.row]
-        if let userAvatar = user.avatar?.getImage() {
-            cell.userIconImageView.image = userAvatar
-        }
-        cell.userNicknameLabel.text = user.login
+        let userAvatar = user.avatar?.getImage()
+        
+        cell.configure(cellData: TableViewCell.CellData(
+                                        username: user.login,
+                                        avatar: userAvatar))
         return cell
      }
     

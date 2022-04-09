@@ -9,20 +9,41 @@ import Foundation
 import UIKit
 
 class TableViewCell: UITableViewCell {
+    //MARK: - types
+    struct CellData{
+        let username: String
+        let avatar: UIImage?
+    }
+    
     //MARK: - data
     
     let userIconImageView = UIImageView()
     let userNicknameLabel = UILabel()
     
-    //MARK: - internal functions
+    //MARK: - public functions
     
-    func prepare() {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        prepare()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    func configure(cellData: CellData){
+        userNicknameLabel.text = cellData.username
+        userIconImageView.image = cellData.avatar
+    }
+    
+    //MARK: - private functions
+    
+    private func prepare() {
         self.selectionStyle = .none
         setupUserIconImageView()
         setupUserNicknameLabel()
     }
-    
-    //MARK: - private functions
     
     private func setupUserIconImageView() {
         self.contentView.addSubview(userIconImageView)
