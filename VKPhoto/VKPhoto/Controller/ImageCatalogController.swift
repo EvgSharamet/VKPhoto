@@ -21,11 +21,8 @@ class ImageCatalogController: UIViewController {
     var settingsButtonDidTapDelegate: (() ->  Void)?
     
     private var userIconImageView: UIImageView?
-    private var userIconImageButton: UIButton?
     private var userNicknameLabel: UILabel?
-    private var settingsButton: UIButton?
     private var imageCollection: UICollectionView?
-    private var plusButton: UIButton?
     private var isEditingAvatar = true
     private static let identifier = "CollectionViewCell"
     private let imagePicker = UIImagePickerController()
@@ -39,11 +36,8 @@ class ImageCatalogController: UIViewController {
         view.prepare()
         
         self.userIconImageView = view.userIconImageView
-        self.userIconImageButton = view.userIconImageButton
         self.userNicknameLabel = view.userNicknameLabel
-        self.settingsButton = view.settingsButton
         self.imageCollection = view.imageCollection
-        self.plusButton = view.plusButton
         
         imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
         imagePicker.allowsEditing = true
@@ -53,9 +47,9 @@ class ImageCatalogController: UIViewController {
         imageCollection?.delegate = self
         imageCollection?.register(CollectionCell.self, forCellWithReuseIdentifier: ImageCatalogController.identifier)
         
-        settingsButton?.addTarget(self, action: #selector(settingsButtonDidTap), for: .touchUpInside)
-        plusButton?.addTarget(self, action: #selector(plusButtonDidTap), for: .touchUpInside)
-        userIconImageButton?.addTarget(self, action: #selector(userIconImageButtonDidTap), for: .touchUpInside)
+        view.settingsButton.addTarget(self, action: #selector(settingsButtonDidTap), for: .touchUpInside)
+        view.plusButton.addTarget(self, action: #selector(plusButtonDidTap), for: .touchUpInside)
+        view.userIconImageButton.addTarget(self, action: #selector(userIconImageButtonDidTap), for: .touchUpInside)
         
         guard let activeUserIndex = UserService.shared.getActiveUserIndex() else { return }
         let activeUser = (UserService.shared.getUsers())[activeUserIndex]

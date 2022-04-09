@@ -13,10 +13,7 @@ class SettingsController: UIViewController {
     
     var logoutButtonDidTapDelegate : (() ->  Void)?
     
-    private var userIconImageView: UIImageView?
-    private var userNicknameLabel: UILabel?
     private var tableView: UITableView?
-    private var logoutButton: UIButton?
     private static let identifier = "TableViewCell"
     
     //MARK: - internal functions
@@ -27,11 +24,7 @@ class SettingsController: UIViewController {
         self.view = view
         view.prepare()
         
-        self.userIconImageView = view.userIconImageView
-        self.userNicknameLabel = view.userNicknameLabel
         self.tableView = view.tableView
-        self.logoutButton = view.logoutButton
-        
         tableView?.delegate = self
         tableView?.dataSource = self
         self.tableView?.register(TableViewCell.self, forCellReuseIdentifier: "TableViewCell")
@@ -39,11 +32,11 @@ class SettingsController: UIViewController {
         guard let activeUserIndex = UserService.shared.getActiveUserIndex() else { return }
         let activeUser = (UserService.shared.getUsers())[activeUserIndex]
         if let userAvatar = activeUser.avatar?.getImage() {
-            userIconImageView?.image = userAvatar
+            view.userIconImageView.image = userAvatar
         }
-        userNicknameLabel?.text = activeUser.login
+        view.userNicknameLabel.text = activeUser.login
         
-        self.logoutButton?.addTarget(self, action: #selector(logoutButtonDidTap), for: .touchUpInside)
+        view.logoutButton.addTarget(self, action: #selector(logoutButtonDidTap), for: .touchUpInside)
     }
     
     //MARK: - private functions

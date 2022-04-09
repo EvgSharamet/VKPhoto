@@ -16,8 +16,6 @@ class LoginController: UIViewController {
     
     private var loginTextField: UITextField?
     private var passwordTextField: UITextField?
-    private var loginButton: UIButton?
-    private var signupButton: UIButton?
     
     //MARK: - internal functions
     
@@ -30,11 +28,9 @@ class LoginController: UIViewController {
         
         loginTextField = view.loginTextField
         passwordTextField = view.passwordTextField
-        loginButton = view.loginButton
-        signupButton = view.signupButton
     
-        loginButton?.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
-        signupButton?.addTarget(self, action: #selector(signupButtonDidTap), for: .touchUpInside)
+        view.loginButton.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
+        view.signupButton.addTarget(self, action: #selector(signupButtonDidTap), for: .touchUpInside)
     }
 
     //MARK: - private functions

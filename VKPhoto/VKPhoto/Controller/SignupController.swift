@@ -12,7 +12,6 @@ class SignupController: UIViewController {
     //MARK: - data
     var nextButtonDidTapDelegate: (() -> Void)?
     
-    private var nextButton: UIButton?
     private var loginTextField: UITextField?
     private var passwordTextField: UITextField?
 
@@ -25,11 +24,10 @@ class SignupController: UIViewController {
         self.view.addSubview(view)
         view.prepare()
         
-        self.nextButton = view.nextButton
         self.loginTextField = view.loginTextField
         self.passwordTextField = view.passwordTextField
         
-        nextButton?.addTarget(self, action: #selector(nextButtonDidTap), for: .touchUpInside)
+        view.nextButton.addTarget(self, action: #selector(nextButtonDidTap), for: .touchUpInside)
     }
     
     //MARK: - private functions
