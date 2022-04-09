@@ -109,7 +109,6 @@
 		85A942CF27FAF4F700425A36 /* VKPhoto */ = {
 			isa = PBXGroup;
 			children = (
-				855DE3382801D37200116AE6 /* UserService */,
 				855DE32D2801BB7400116AE6 /* Utils */,
 				85A942ED27FAFB4D00425A36 /* Model */,
 				85A942EC27FAFB3900425A36 /* Controller */,
@@ -153,6 +152,7 @@
 		85A942ED27FAFB4D00425A36 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				855DE3382801D37200116AE6 /* UserService */,
 				85D834EB27FC527A00706E57 /* ImageItem.swift */,
 			);
 			path = Model;
