@@ -93,7 +93,6 @@
 		85A942C427FAF4F700425A36 = {
 			isa = PBXGroup;
 			children = (
-				85A942F227FB25BB00425A36 /* FontsReference.swift */,
 				85A942CF27FAF4F700425A36 /* VKPhoto */,
 				85A942CE27FAF4F700425A36 /* Products */,
 			);
@@ -132,6 +131,7 @@
 				85A942F827FB52F800425A36 /* ImageCatalogView.swift */,
 				85A942FC27FB63F000425A36 /* SettingsView.swift */,
 				85D12A9327FEFA330094C7BF /* SignupView.swift */,
+				85A942F227FB25BB00425A36 /* FontsReference.swift */,
 				855DE3322801BEEE00116AE6 /* CollectionCell.swift */,
 				855DE3342801BFD500116AE6 /* TableViewCell.swift */,
 			);
