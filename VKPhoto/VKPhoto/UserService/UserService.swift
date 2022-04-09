@@ -2,21 +2,19 @@
 //  UserService.swift
 //  VKPhoto
 //
-//  Created by Евгения Шарамет on 05.04.2022.
+//  Created by Евгения Шарамет on 09.04.2022.
 //
 
 import Foundation
 import UIKit
 
-class UserService {
+
+
+import Foundation
+import UIKit
+
+class UserService: IUserService {
     //MARK: - types
-    
-    struct User: Codable {
-        let login: String
-        let password: String
-        var avatar: ImageItem?
-        var imageСollection: [ImageItem]
-    }
     
     private struct UserData: Codable {
         var userList = [User]()
@@ -25,7 +23,6 @@ class UserService {
     
     //MARK: - data
     
-    static let shared = UserService()
     var userChangedListener: (() -> Void)?
     private let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent(storeFileName)
    
@@ -86,6 +83,4 @@ class UserService {
                 .first { $0.element.login == login && $0.element.password == password }?
                 .offset
     }
-    
-    private init() {}
 }

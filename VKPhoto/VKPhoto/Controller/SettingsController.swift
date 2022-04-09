@@ -15,21 +15,34 @@ class SettingsController: UIViewController {
     
     private var tableView: UITableView?
     private static let identifier = "TableViewCell"
+    private let userService: IUserService
+    
+    //MARK: - public functions
+    
+    init(userService: IUserService) {
+        self.userService = userService
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     //MARK: - internal functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let view = SettingsView()
-        self.view = view
+        self.view.addSubview(view)
+        view.stretch()
         
         self.tableView = view.tableView
         tableView?.delegate = self
         tableView?.dataSource = self
         self.tableView?.register(TableViewCell.self, forCellReuseIdentifier: "TableViewCell")
         
-        guard let activeUserIndex = UserService.shared.getActiveUserIndex() else { return }
-        let activeUser = (UserService.shared.getUsers())[activeUserIndex]
+        guard let activeUserIndex = userService.getActiveUserIndex() else { return }
+        let activeUser = (userService.getUsers())[activeUserIndex]
         if let userAvatar = activeUser.avatar?.getImage() {
             view.userIconImageView.image = userAvatar
         }
@@ -44,8 +57,8 @@ class SettingsController: UIViewController {
         let logoutAlert = UIAlertController(title: "Are you sure?", message: nil, preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
         let submitAction = UIAlertAction(title: "OK", style: .default) { _ in
-            UserService.shared.setActiveUserIndex(index: nil)
-            UserService.shared.save()
+            self.userService.setActiveUserIndex(index: nil)
+            self.userService.save()
             self.logoutButtonDidTapDelegate?()
         }
         logoutAlert.addAction(submitAction)
@@ -58,12 +71,12 @@ extension SettingsController: UITableViewDelegate, UITableViewDataSource {
     //MARK: - internal functions
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        UserService.shared.getUsers().count
+        userService.getUsers().count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView?.dequeueReusableCell(withIdentifier: SettingsController.identifier, for: indexPath) as! TableViewCell
-        let user = (UserService.shared.getUsers())[indexPath.row]
+        let user = (userService.getUsers())[indexPath.row]
         let userAvatar = user.avatar?.getImage()
         
         cell.configure(cellData: TableViewCell.CellData(

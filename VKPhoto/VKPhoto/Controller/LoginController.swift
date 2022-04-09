@@ -16,6 +16,18 @@ class LoginController: UIViewController {
     
     private var loginTextField: UITextField?
     private var passwordTextField: UITextField?
+    private let userService: IUserService
+    
+    //MARK: - public functions
+    
+    init(userService: IUserService) {
+        self.userService = userService
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     //MARK: - internal functions
     
@@ -38,9 +50,9 @@ class LoginController: UIViewController {
     @objc private func loginButtonDidTap() {
         if let login = loginTextField?.text?.trimmingCharacters(in: .whitespacesAndNewlines), !login.isEmpty,
            let password = passwordTextField?.text?.trimmingCharacters(in: .whitespacesAndNewlines), !password.isEmpty {
-            if let activeUserIndex = UserService.shared.findUser(login: login, password: password) {
-                UserService.shared.setActiveUserIndex(index: activeUserIndex)
-                UserService.shared.save()
+            if let activeUserIndex = userService.findUser(login: login, password: password) {
+                userService.setActiveUserIndex(index: activeUserIndex)
+                userService.save()
                 loginButtonDidTapDelegate?()
             } else {
                 let loginAlert = UIAlertController(title: "No such user exists", message: nil, preferredStyle: .alert)

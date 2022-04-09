@@ -14,7 +14,19 @@ class SignupController: UIViewController {
     
     private var loginTextField: UITextField?
     private var passwordTextField: UITextField?
+    private let userService: IUserService
 
+    //MARK: - public functions
+    
+    init(userService: IUserService) {
+        self.userService = userService
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     //MARK: - internal functions
     
     override func viewDidLoad() {
@@ -40,14 +52,14 @@ class SignupController: UIViewController {
                 signupAlert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
                 self.present(signupAlert, animated: true, completion: nil)
             } else {
-                if let _ = UserService.shared.findUser(login: login, password: password) {
+                if let _ = userService.findUser(login: login, password: password) {
                     let signupAlert = UIAlertController(title: "User with the same login and password already exists", message: nil, preferredStyle: .alert)
                     signupAlert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
                     self.present(signupAlert, animated: true, completion: nil)
                 } else {
-                    let newUser = UserService.User(login: login, password: password, avatar: nil, imageСollection: [])
-                    UserService.shared.setActiveUserIndex(index: (UserService.shared.addUser(newUser)))
-                    UserService.shared.save()
+                    let newUser = User(login: login, password: password, avatar: nil, imageСollection: [])
+                    userService.setActiveUserIndex(index: (userService.addUser(newUser)))
+                    userService.save()
                     nextButtonDidTapDelegate?()
                 }
             }

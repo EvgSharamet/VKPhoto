@@ -9,11 +9,27 @@ import Foundation
 import UIKit
 
 class MainNavigationController: UINavigationController {
+    
+    //MARK: - data
+    
+    private let userService: IUserService
+    
+    //MARK: - public functions
+    
+    init(userService: IUserService) {
+        self.userService = userService
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     //MARK: - internal functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let imageCatalogWindow = ImageCatalogController()
+        let imageCatalogWindow = ImageCatalogController(userService: userService)
         imageCatalogWindow.settingsButtonDidTapDelegate = goToSettings
         setViewControllers([imageCatalogWindow], animated: true)
     }
@@ -26,7 +42,7 @@ class MainNavigationController: UINavigationController {
     //MARK: - private functions
     
     private func goToSettings() {
-        let settingsWindow = SettingsController()
+        let settingsWindow = SettingsController(userService: userService)
         settingsWindow.logoutButtonDidTapDelegate = logoutOfSystem
         pushViewController(settingsWindow, animated: true)
     }
@@ -37,14 +53,14 @@ class MainNavigationController: UINavigationController {
     }
     
     private func checkAuthorization() {
-        let activeUserIndex = UserService.shared.getActiveUserIndex()
+        let activeUserIndex = userService.getActiveUserIndex()
         
         if activeUserIndex == nil {
-            let loginWindow = LoginController()
+            let loginWindow = LoginController(userService: userService)
             loginWindow.modalPresentationStyle = .fullScreen
             loginWindow.loginButtonDidTapDelegate = onUserAuthorized
             loginWindow.signupButtonDidTapDelegate = {
-                let signupWindow = SignupController()
+                let signupWindow = SignupController(userService: self.userService)
                 signupWindow.nextButtonDidTapDelegate = self.onUserAuthorized
                 loginWindow.present(signupWindow, animated: true)
             }

@@ -26,13 +26,25 @@ class ImageCatalogController: UIViewController {
     private var isEditingAvatar = true
     private static let identifier = "CollectionViewCell"
     private let imagePicker = UIImagePickerController()
+    private let userService: IUserService
+    
+    //MARK: - public functions
+    
+    init(userService: IUserService) {
+        self.userService = userService
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     //MARK: - internal functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let view = ImageCatalogView()
-        self.view = view
+        self.view.addSubview(view)
         view.stretch()
         
         self.userIconImageView = view.userIconImageView
@@ -51,14 +63,14 @@ class ImageCatalogController: UIViewController {
         view.plusButton.addTarget(self, action: #selector(plusButtonDidTap), for: .touchUpInside)
         view.userIconImageButton.addTarget(self, action: #selector(userIconImageButtonDidTap), for: .touchUpInside)
         
-        guard let activeUserIndex = UserService.shared.getActiveUserIndex() else { return }
-        let activeUser = (UserService.shared.getUsers())[activeUserIndex]
+        guard let activeUserIndex = userService.getActiveUserIndex() else { return }
+        let activeUser = (userService.getUsers())[activeUserIndex]
         if let userAvatar = activeUser.avatar?.getImage() {
             userIconImageView?.image = userAvatar
         }
         userNicknameLabel?.text = activeUser.login
         
-        UserService.shared.userChangedListener = { self.viewDidLoad()}
+        userService.userChangedListener = { self.viewDidLoad()}
     }
 
     //MARK: - internal functions
@@ -93,21 +105,21 @@ extension ImageCatalogController: UIImagePickerControllerDelegate, UINavigationC
             }
             if isEditingAvatar {
                 let newAvatar = ImageItem(filename: imageName)
-                guard let activeUserIndex = UserService.shared.getActiveUserIndex() else { return }
-                let activeUser = (UserService.shared.getUsers())[activeUserIndex]
+                guard let activeUserIndex = userService.getActiveUserIndex() else { return }
+                let activeUser = (userService.getUsers())[activeUserIndex]
                 var activeUserWithUpdate = activeUser
                 activeUserWithUpdate.avatar = newAvatar
-                UserService.shared.updateUser(activeUserWithUpdate, index: activeUserIndex)
+                userService.updateUser(activeUserWithUpdate, index: activeUserIndex)
                 self.userIconImageView?.image = newAvatar.getImage()
             } else {
                 let newItem = ImageItem(filename: imageName)
-                guard let activeUserIndex = UserService.shared.getActiveUserIndex() else { return }
-                var user = (UserService.shared.getUsers())[activeUserIndex]
+                guard let activeUserIndex = userService.getActiveUserIndex() else { return }
+                var user = (userService.getUsers())[activeUserIndex]
                 user.imageСollection.append(newItem)
-                UserService.shared.updateUser(user, index: activeUserIndex)
+                userService.updateUser(user, index: activeUserIndex)
                 imageCollection?.reloadData()
             }
-            UserService.shared.save()
+            userService.save()
         } catch {
             print("ImageCatalogControllerError: \(error)")
         }
@@ -127,14 +139,14 @@ extension ImageCatalogController: UIImagePickerControllerDelegate, UINavigationC
 extension ImageCatalogController: UICollectionViewDataSource, UICollectionViewDelegate  {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let activeUserIndex = UserService.shared.getActiveUserIndex() else {  return 0 } // тут нужна заглушка на такое дело
-        return (UserService.shared.getUsers())[activeUserIndex].imageСollection.count
+        guard let activeUserIndex = userService.getActiveUserIndex() else {  return 0 }
+        return (userService.getUsers())[activeUserIndex].imageСollection.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCatalogController.identifier, for: indexPath) as! CollectionCell
-        guard let activeUserIndex = UserService.shared.getActiveUserIndex() else { return cell }
-        let activeUser = (UserService.shared.getUsers())[activeUserIndex]
+        guard let activeUserIndex = userService.getActiveUserIndex() else { return cell }
+        let activeUser = (userService.getUsers())[activeUserIndex]
         cell.configure(image: activeUser.imageСollection[indexPath.row].getImage())
         return cell
     }
