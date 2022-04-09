@@ -63,7 +63,7 @@ class ImageCatalogController: UIViewController {
         
         imageCollection?.dataSource = self
         imageCollection?.delegate = self
-        imageCollection?.register(CollectionCell.self, forCellWithReuseIdentifier: ImageCatalogController.identifier)
+        imageCollection?.register(SettingsCell.self, forCellWithReuseIdentifier: ImageCatalogController.identifier)
         
         view.settingsButton.addTarget(self, action: #selector(settingsButtonDidTap), for: .touchUpInside)
         view.plusButton.addTarget(self, action: #selector(plusButtonDidTap), for: .touchUpInside)
@@ -141,6 +141,7 @@ extension ImageCatalogController: UIImagePickerControllerDelegate, UINavigationC
 }
 
 extension ImageCatalogController: UICollectionViewDataSource, UICollectionViewDelegate  {
+    //MARK: - internal functions
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let activeUserIndex = userService.getActiveUserIndex() else {  return 0 }
@@ -148,15 +149,22 @@ extension ImageCatalogController: UICollectionViewDataSource, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCatalogController.identifier, for: indexPath) as! CollectionCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCatalogController.identifier, for: indexPath) as? ImageCatalogCell else {
+            return UICollectionViewCell()
+        }
         guard let activeUserIndex = userService.getActiveUserIndex() else { return cell }
         let activeUser = (userService.getUsers())[activeUserIndex]
         cell.configure(image: activeUser.imageСollection[indexPath.row].getImage())
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        10
+    }
 }
 
 extension ImageCatalogController: UICollectionViewDelegateFlowLayout {
+    //MARK: - internal functions
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = itemWidth(for: view.frame.width, spacing: LayoutConstant.spacing)

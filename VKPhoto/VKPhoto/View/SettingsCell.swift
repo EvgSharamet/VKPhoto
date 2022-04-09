@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class TableViewCell: UITableViewCell {
+class SettingsCell: UITableViewCell {
     //MARK: - types
     struct CellData{
         let username: String

@@ -41,7 +41,6 @@ class ImageCatalogView: UIView {
         setupUserNickNameLabel()
         setupUserIconImageView()
         setupUserIconImageButton()
-        setupIconImageView()
         setupSettingsButton()
         setupImageCollection()
         setupPlusButton()
@@ -68,6 +67,10 @@ class ImageCatalogView: UIView {
         userIconImageView.widthAnchor.constraint(equalToConstant: 180).isActive = true
         userIconImageView.layer.cornerRadius = 90
         userIconImageView.layer.masksToBounds = true
+        userIconImageView.contentMode = .scaleAspectFill
+        userIconImageView.image = UIImage(named: "dogTemplate")
+        userIconImageView.contentMode = .scaleAspectFit
+        userIconImageView.backgroundColor = .systemGray6
     }
     
     private func  setupUserIconImageButton() {
@@ -78,12 +81,6 @@ class ImageCatalogView: UIView {
         userIconImageButton.centerYAnchor.constraint(equalTo: userIconImageView.centerYAnchor).isActive = true
         userIconImageButton.heightAnchor.constraint(equalTo: userIconImageView.heightAnchor).isActive = true
         userIconImageButton.layer.cornerRadius = userIconImageView.layer.cornerRadius
-    }
-    
-    private func setupIconImageView() {
-        userIconImageView.image = UIImage(named: "dogTemplate")
-        userIconImageView.contentMode = .scaleAspectFit
-        userIconImageView.backgroundColor = .systemGray6
     }
     
     private func setupSettingsButton() {

@@ -40,7 +40,7 @@ class SettingsController: UIViewController {
         self.tableView = view.tableView
         tableView?.delegate = self
         tableView?.dataSource = self
-        self.tableView?.register(TableViewCell.self, forCellReuseIdentifier: "TableViewCell")
+        self.tableView?.register(ImageCatalogCell.self, forCellReuseIdentifier: "TableViewCell")
         
         guard let activeUserIndex = userService.getActiveUserIndex() else { return }
         let activeUser = (userService.getUsers())[activeUserIndex]
@@ -76,13 +76,13 @@ extension SettingsController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView?.dequeueReusableCell(withIdentifier: SettingsController.identifier, for: indexPath) as! TableViewCell
+        guard let cell = self.tableView?.dequeueReusableCell(withIdentifier: SettingsController.identifier, for: indexPath) as? SettingsCell else {
+            return UITableViewCell()
+        }
         let user = (userService.getUsers())[indexPath.row]
         let userAvatar = user.avatar?.getImage()
         
-        cell.configure(cellData: TableViewCell.CellData(
-                                        username: user.login,
-                                        avatar: userAvatar))
+        cell.configure(cellData: SettingsCell.CellData(username: user.login, avatar: userAvatar))
         return cell
      }
     

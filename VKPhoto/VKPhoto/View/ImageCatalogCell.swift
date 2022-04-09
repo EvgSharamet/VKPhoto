@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CollectionCell: UICollectionViewCell {
+class ImageCatalogCell: UICollectionViewCell {
     //MARK: - data
     
     let imageView = UIImageView()
@@ -33,7 +33,7 @@ class CollectionCell: UICollectionViewCell {
      private func prepare() {
         self.contentView.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFill
         imageView.stretch()
-        imageView.contentMode = .scaleAspectFit
     }
 }

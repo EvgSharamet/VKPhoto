@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 class MainNavigationController: UINavigationController {
-    
     //MARK: - data
     
     private let userService: IUserService

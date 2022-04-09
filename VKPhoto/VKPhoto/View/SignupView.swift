@@ -110,7 +110,7 @@ class SignupView: UIView {
         nextButton.topAnchor.constraint(equalTo: mainStackView.bottomAnchor, constant: 20).isActive = true
         nextButton.widthAnchor.constraint(equalToConstant: 120).isActive = true
         nextButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        nextButton.setTitle("Next", for: .normal)
+        nextButton.setTitle("Register", for: .normal)
         nextButton.backgroundColor = UIColor(
             red: 75 / 255,
             green: 116 / 255,
