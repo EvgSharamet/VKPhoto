@@ -19,9 +19,20 @@ class SignupView: UIView {
     private let mainStackView = UIStackView()
     private let loginLabel = UILabel()
     
-    //MARK: - internal functions
+    //MARK: - public functions
     
-    func prepare() {
+    init() {
+        super.init(frame: .zero)
+        prepare()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: - private functions
+    
+    private func prepare() {
         self.backgroundColor = .white
         self.translatesAutoresizingMaskIntoConstraints = false
         self.stretch()
@@ -32,8 +43,6 @@ class SignupView: UIView {
         setupPasswordTextField()
         setupNextButton()
     }
-    
-    //MARK: - private functions
     
     private func setupVKLogo() {
         self.addSubview(vkLogo)

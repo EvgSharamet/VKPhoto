@@ -17,17 +17,26 @@ class SettingsView: UIView {
     let tableView = UITableView()
     let logoutButton = UIButton()
     
-    //MARK: - internal functions
+    //MARK: - public functions
     
-    func prepare() {
+    init() {
+        super.init(frame: .zero)
+        prepare()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: - private functions
+    
+    private func prepare() {
         self.backgroundColor = .white
         setupUserIconImageView()
         setupUserNickNameLabel()
         setupTableView()
         setupLogoutButton()
     }
-    
-    //MARK: - private functions
     
     private func setupUserIconImageView() {
         self.addSubview(userIconImageView)
