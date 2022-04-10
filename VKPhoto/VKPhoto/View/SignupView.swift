@@ -33,7 +33,7 @@ class SignupView: UIView {
     //MARK: - private functions
     
     private func prepare() {
-        self.backgroundColor = .white
+        self.backgroundColor = .systemGroupedBackground
         self.translatesAutoresizingMaskIntoConstraints = false
         self.stretch()
         setupVKLogo()
@@ -59,18 +59,16 @@ class SignupView: UIView {
     
     private func setupMainStackView() {
         self.addSubview(mainStackView)
-        mainStackView.backgroundColor = .white
+        mainStackView.backgroundColor = .systemGroupedBackground
         mainStackView.axis = .vertical
         mainStackView.alignment = .center
         mainStackView.distribution = .fillEqually
         mainStackView.spacing = 10
-        
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
         mainStackView.topAnchor.constraint(equalTo: vkLogo.bottomAnchor, constant: 10).isActive = true
         mainStackView.heightAnchor.constraint(equalToConstant: 160).isActive = true
         mainStackView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         mainStackView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
-        mainStackView.backgroundColor = .white
     }
     
     private func setupLoginLabel() {
@@ -89,7 +87,6 @@ class SignupView: UIView {
         loginTextField.placeholder = "Login"
         loginTextField.backgroundColor = .systemGray6
         loginTextField.textAlignment = .left
-        loginTextField.textColor = .black
     }
     
     private func setupPasswordTextField() {
@@ -100,7 +97,6 @@ class SignupView: UIView {
         passwordTextField.setLeftPaddingPoints(20)
         passwordTextField.backgroundColor = .systemGray6
         passwordTextField.textAlignment = .left
-        passwordTextField.textColor = .black
     }
     
     private func setupNextButton() {
@@ -111,7 +107,7 @@ class SignupView: UIView {
         nextButton.widthAnchor.constraint(equalToConstant: 120).isActive = true
         nextButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         nextButton.setTitle("Register", for: .normal)
-        nextButton.backgroundColor = UIColor(
+        nextButton.backgroundColor =  UIColor(
             red: 75 / 255,
             green: 116 / 255,
             blue: 163 / 255,

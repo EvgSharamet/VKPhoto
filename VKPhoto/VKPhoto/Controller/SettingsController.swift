@@ -40,7 +40,7 @@ class SettingsController: UIViewController {
         self.tableView = view.tableView
         tableView?.delegate = self
         tableView?.dataSource = self
-        self.tableView?.register(ImageCatalogCell.self, forCellReuseIdentifier: "TableViewCell")
+        self.tableView?.register(SettingsCell.self, forCellReuseIdentifier: "TableViewCell")
         
         guard let activeUserIndex = userService.getActiveUserIndex() else { return }
         let activeUser = (userService.getUsers())[activeUserIndex]
@@ -88,10 +88,14 @@ extension SettingsController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerLabel = UILabel()
-        headerLabel.backgroundColor = .white
+        headerLabel.backgroundColor = .systemGroupedBackground
         headerLabel.text = "Other users:"
         headerLabel.font = UIConst.tableHeaderFont
         headerLabel.textColor = .darkGray
         return headerLabel
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        80
     }
 }

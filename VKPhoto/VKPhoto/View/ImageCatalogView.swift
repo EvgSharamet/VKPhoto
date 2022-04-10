@@ -37,7 +37,7 @@ class ImageCatalogView: UIView {
     //MARK: - private functions
     
     private func prepare() {
-        self.backgroundColor = .white
+        self.backgroundColor = .systemGroupedBackground
         setupUserNickNameLabel()
         setupUserIconImageView()
         setupUserIconImageButton()

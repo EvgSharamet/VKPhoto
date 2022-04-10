@@ -31,7 +31,7 @@ class SettingsView: UIView {
     //MARK: - private functions
     
     private func prepare() {
-        self.backgroundColor = .white
+        self.backgroundColor = .systemGroupedBackground
         setupUserIconImageView()
         setupUserNickNameLabel()
         setupTableView()

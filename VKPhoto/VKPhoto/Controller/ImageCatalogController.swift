@@ -63,7 +63,8 @@ class ImageCatalogController: UIViewController {
         
         imageCollection?.dataSource = self
         imageCollection?.delegate = self
-        imageCollection?.register(SettingsCell.self, forCellWithReuseIdentifier: ImageCatalogController.identifier)
+        imageCollection?.register(ImageCatalogCell.self, forCellWithReuseIdentifier: ImageCatalogController.identifier)
+        imageCollection?.backgroundColor = .systemGroupedBackground
         
         view.settingsButton.addTarget(self, action: #selector(settingsButtonDidTap), for: .touchUpInside)
         view.plusButton.addTarget(self, action: #selector(plusButtonDidTap), for: .touchUpInside)

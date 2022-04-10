@@ -32,6 +32,7 @@ class SettingsCell: UITableViewCell {
     }
     
     func configure(cellData: CellData){
+        self.backgroundColor = .systemGroupedBackground
         userNicknameLabel.text = cellData.username
         if cellData.avatar == nil {
             userIconImageView.image = UIImage(named: "dogTemplate")
@@ -50,11 +51,9 @@ class SettingsCell: UITableViewCell {
     
     private func setupUserIconImageView() {
         self.contentView.addSubview(userIconImageView)
-        self.contentView.heightAnchor.constraint(equalToConstant: 80).isActive = true
         guard let superview = userIconImageView.superview else { return }
         userIconImageView.translatesAutoresizingMaskIntoConstraints = false
         userIconImageView.leftAnchor.constraint(equalTo: superview.leftAnchor, constant: 5).isActive = true
-        userIconImageView.centerYAnchor.constraint(equalTo: superview.centerYAnchor).isActive = true
         userIconImageView.topAnchor.constraint(equalTo: superview.topAnchor, constant: 3).isActive = true
         userIconImageView.bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: -3).isActive = true
         userIconImageView.widthAnchor.constraint(equalTo: userIconImageView.heightAnchor).isActive = true

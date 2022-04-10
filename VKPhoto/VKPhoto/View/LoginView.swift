@@ -35,7 +35,7 @@ class LoginView: UIView {
     //MARK: - private functions
     
     private func prepare() {
-        self.backgroundColor = .white
+        self.backgroundColor = .systemGroupedBackground
         self.translatesAutoresizingMaskIntoConstraints = false
         self.stretch()
         setupVKLogo()
@@ -63,7 +63,7 @@ class LoginView: UIView {
     
     private func setupMainStackView() {
         self.addSubview(mainStackView)
-        mainStackView.backgroundColor = .white
+        mainStackView.backgroundColor = .systemGroupedBackground
         mainStackView.axis = .vertical
         mainStackView.alignment = .center
         mainStackView.distribution = .fillEqually
@@ -74,7 +74,6 @@ class LoginView: UIView {
         mainStackView.heightAnchor.constraint(equalToConstant: 160).isActive = true
         mainStackView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         mainStackView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
-        mainStackView.backgroundColor = .white
     }
     
     private func setupLoginLabel() {
@@ -93,7 +92,6 @@ class LoginView: UIView {
         loginTextField.placeholder = "Login"
         loginTextField.backgroundColor = .systemGray6
         loginTextField.textAlignment = .left
-        loginTextField.textColor = .black
     }
     
     private func setupPasswordTextField() {
@@ -104,7 +102,6 @@ class LoginView: UIView {
         passwordTextField.setLeftPaddingPoints(20)
         passwordTextField.backgroundColor = .systemGray6
         passwordTextField.textAlignment = .left
-        passwordTextField.textColor = .black
     }
     
     private func setupLoginButton() {
