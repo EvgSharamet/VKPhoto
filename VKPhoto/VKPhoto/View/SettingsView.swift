@@ -47,7 +47,7 @@ class SettingsView: UIView {
         userIconImageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
         userIconImageView.layer.cornerRadius = 50
         userIconImageView.image = UIImage(named: "dogTemplate")
-        userIconImageView.contentMode = .scaleAspectFit
+        userIconImageView.contentMode = .scaleAspectFill
         userIconImageView.backgroundColor = .lightGray.withAlphaComponent(0.5)
         userIconImageView.layer.masksToBounds = true
     }
@@ -66,6 +66,7 @@ class SettingsView: UIView {
     
     private func setupTableView() {
         self.addSubview(tableView)
+        tableView.backgroundColor = .systemGroupedBackground
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
         tableView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: 10).isActive = true

@@ -59,7 +59,7 @@ class SettingsCell: UITableViewCell {
         userIconImageView.widthAnchor.constraint(equalTo: userIconImageView.heightAnchor).isActive = true
         userIconImageView.layer.cornerRadius = 37
         userIconImageView.backgroundColor = .lightGray
-        userIconImageView.contentMode = .scaleAspectFit
+        userIconImageView.contentMode = .scaleAspectFill
         userIconImageView.layer.masksToBounds = true
     }
     

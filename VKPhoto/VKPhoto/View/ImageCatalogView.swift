@@ -69,8 +69,8 @@ class ImageCatalogView: UIView {
         userIconImageView.layer.masksToBounds = true
         userIconImageView.contentMode = .scaleAspectFill
         userIconImageView.image = UIImage(named: "dogTemplate")
-        userIconImageView.contentMode = .scaleAspectFit
-        userIconImageView.backgroundColor = .systemGray6
+        userIconImageView.contentMode = .scaleAspectFill
+        userIconImageView.backgroundColor = .lightGray
     }
     
     private func  setupUserIconImageButton() {
